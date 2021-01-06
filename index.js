@@ -48,10 +48,10 @@ client.on('message', message => {
 	if (!message.guild) return;
 	if (message.content.startsWith('!kick')) {
 
-		const user = message.mentions.users.first();
 	  if (user) {
 		const member = message.guild.member(user);  
-		if (member) {
+		if (message.member.hasPermission('KICK_MEMBERS')) {
+			
 		  member
 			.kick('Optional reason that will display in the audit logs')
 			.then(() => {
