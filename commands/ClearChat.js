@@ -1,10 +1,10 @@
-const messageArray = message.content.split(' ');
-const args = messageArray.slice(1);
-
 module.exports = {
     name: 'ClearChat',
     description: 'C',
     async execute(message, args, client) {
+        const messageArray = message.content.split(' ');
+        const args = messageArray.slice(1);
+
         if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send('Lack of Perms!');
     
         let deleteAmount;
