@@ -1,9 +1,7 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "avatar",
     description: "Brodcast someone's avatar",
-    async execute(message, args) {
+    async execute(message, args, Discord, client) {
         const user = message.mentions.users.first() || message.author;
     
         const embed = new Discord.MessageEmbed()
@@ -14,5 +12,5 @@ module.exports = {
           .setTimestamp();
     
         message.channel.send(embed);
-      },
+    }
 }

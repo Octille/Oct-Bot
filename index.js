@@ -8,11 +8,13 @@ const { prefix, } = require('./config.json');
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
+client.commands = new Discord.Collection();
+const commandFiles = fs
+  .readdirSync("./commands/")
+  .filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+  const command = require(`./commands/${file}`);
+  client.commands.set(command.name, command);
 }
 
 client.once('ready', () => {
@@ -36,9 +38,8 @@ client.on('message', message => {
 	if (!client.commands.has(command)) return;
 
 	try {
-		client.commands.get(command).execute(message, args, Discord, client);
-	} catch (error) {
-		console.error(error);
+		client.commands.get('avatar').execute(message, args, Discord, client);
+	} catch {
 		message.reply('there was an error trying to execute that command!');
 	}
 
