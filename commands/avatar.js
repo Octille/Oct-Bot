@@ -3,19 +3,16 @@ const Discord = require('discord.js');
 module.exports = {
     name: "avatar",
     description: "Brodcast someone's avatar",
-
-    async run (client, message, args) {
-
-        let member = message.mentions.users.first() || message.author
-
-        let avatar = member.displayAvatarURL({size: 1024})
-
-
+    async execute(message, args) {
+        const user = message.mentions.users.first() || message.author;
+    
         const embed = new Discord.MessageEmbed()
-        .setTitle(`${member.username}'s avatar`)
-        .setImage(avatar)
-        .setColor("RANDOM")
-
+          .setTitle("Avatar Request : " + user.username)
+          .setImage(user.displayAvatarURL())
+          .setColor("GREEN")
+          .setFooter(`Requested by ${message.author.username}`)
+          .setTimestamp();
+    
         message.channel.send(embed);
-    }
+      },
 }
