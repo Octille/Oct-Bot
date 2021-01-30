@@ -42,17 +42,6 @@ client.on('message', message => {
 	} catch {
 		message.reply('there was an error trying to execute that command!');
 	}
-});
-
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
-
-	if (command === "avatar"){
-		client.commands.get('avatar').execute(message, args, Discord, client)
-	}
 
 });
 
