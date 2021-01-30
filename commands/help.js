@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const colors = require('../colors.json');
 const {
-    prefix
+    prefix//cdcsdfcds sfsdf esdf
 
 } = require('../config.json');
 
