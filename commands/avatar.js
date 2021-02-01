@@ -1,16 +1,15 @@
+const Discord = require('discord.js');
+
 module.exports = {
-	name: 'avatar',
-	description: 'Get the avatar URL of the tagged user(s), or your own avatar.',
-	aliases: ['icon', 'pfp'],
-	execute(message) {
-		if (!message.mentions.users.size) {
-			return message.channel.send(`Your avatar: <${message.author.displayAvatarURL({ dynamic: true })}>`);
-		}
+    name: "avatar",
+    description: "Brodcast someone's avatar",
 
-		const avatarList = message.mentions.users.map(user => {
-			return `${user.username}'s avatar: <${user.displayAvatarURL({ dynamic: true })}>`;
-		});
-
-		message.channel.send(avatarList);
-	},
-};
+    async run (client, message, args) {
+        const user = message.mentions.users.first() || message.author;
+        const avatarEmbed = new Discord.RichEmbed()
+            .setColor(0x333333)
+            .setAuthor(user.username)
+            .setImage(user.avatarURL);
+        message.channel.send(avatarEmbed);
+    }
+}
