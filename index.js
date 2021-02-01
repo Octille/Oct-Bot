@@ -3,18 +3,16 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch");
 
 
-const { prefix, } = require('./config.json');
+const { prefix, token } = require('./config.json');
 
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
-client.commands = new Discord.Collection();
-const commandFiles = fs
-  .readdirSync("./commands/")
-  .filter((file) => file.endsWith(".js"));
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
 }
 
 client.once('ready', () => {
@@ -38,8 +36,9 @@ client.on('message', message => {
 	if (!client.commands.has(command)) return;
 
 	try {
-	
-	} catch {
+		client.commands.get(command).execute(message, args, Discord, client);
+	} catch (error) {
+		console.error(error);
 		message.reply('there was an error trying to execute that command!');
 	}
 
