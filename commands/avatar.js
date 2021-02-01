@@ -5,11 +5,13 @@ module.exports = {
     description: "Brodcast someone's avatar",
 
     async run (client, message, args) {
-        const user = message.mentions.users.first() || message.author;
-        const avatarEmbed = new Discord.RichEmbed()
-            .setColor(0x333333)
-            .setAuthor(user.username)
-            .setImage(user.avatarURL);
-        message.channel.send(avatarEmbed);
-    }
+        let user = message.mentions.users.first();
+        if(!user) user = message.author;
+        let color = message.member.displayHexColor;
+        if (color == '#000000') color = message.member.hoistRole.hexColor;
+        const embed = new Discord.RichEmbed()
+                        .setImage(user.avatarURL)
+                        .setColor(color)
+         message.channel.send({embed});
+      }
 }
