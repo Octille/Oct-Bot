@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path')
 const Discord = require('discord.js');
 const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
