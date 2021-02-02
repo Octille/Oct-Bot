@@ -4,12 +4,22 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
 const config = require('./config.json')
+const mongo = require('./mongo')
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
 client.on('ready', () => {
 	console.log('Ready!')
 })
+
+await mongo().then((mongoose) => {
+    try {
+      console.log('Connected to mongo!')
+    } finally {
+      mongoose.connection.close()
+    }
+  })
+
 
 const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
@@ -26,6 +36,7 @@ const readCommands = (dir) => {
 	}
   }
 }
+
 
 readCommands('commands')
 

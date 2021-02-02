@@ -1,3 +1,5 @@
 {
-	"prefix": "!"
+	"prefix": "!",
+	"token": "",
+	"mongopath": "mongodb://localhost:27017"
 }
