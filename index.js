@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
 const config = require('./config.json')
-const mongo = require('./mongo')
+const mongo = require('./mango')
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
