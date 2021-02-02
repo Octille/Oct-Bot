@@ -9,17 +9,16 @@ const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]}
 client.commands = new Discord.Collection();
 
 client.on('ready', async () => {
-	console.log('Ready!')
-})
-
-await mongo().then((mongoose) => {
-    try {
-      console.log('Connected to mongo!')
-    } finally {
-      mongoose.connection.close()
-    }
+	console.log('The client is ready!')
+  
+	await mongo().then((mongoose) => {
+	  try {
+		console.log('Connected to mongo!')
+	  } finally {
+		mongoose.connection.close()
+	  }
+	})
   })
-
 
 const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
