@@ -7,7 +7,7 @@ const fs = require('fs');
 const nbt = require('prismarine-nbt');
 const {
     api_key
-} = require('.../config.json');
+} = require('./config.json');
 const { isNullOrUndefined } = require('util');
 
 module.exports = {
