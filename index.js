@@ -5,43 +5,46 @@ const fetch = require("node-fetch");
 
 const { prefix, token } = require('./config.json');
 
-const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
-client.commands = new Discord.Collection();
+const client = new Client({
+    disableEveryone: true
+})
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+client.commands = new Collection();
+client.aliases = new Collection();
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
-}
 
-client.once('ready', () => {
-	console.log('Ready!');
+["command"].forEach(handler => {
+    require(`./handlers/${handler}`)(client);
 });
 
-client.once('reconnecting', () => {
-	console.log('Reconnecting!');
-});
+client.on("ready", () => {
+    console.log(`Ready to go!`);
 
-client.once('disconnect', () => {
-	console.log('Disconnect!');
-});
+    client.user.setActivity("under development", {type:"WATCHING"})
+})
 
-client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+client.on("message", async message => {
+   
 
-	const args = message.content.slice(prefix.length).trim().split(/ +/);
-	const command = args.shift().toLowerCase();
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!message.content.startsWith(prefix)) return;
 
-	if (!client.commands.has(command)) return;
+    if (!message.member) message.member = await message.guild.fetchMember(message);
 
-	try {
-		client.commands.get(command).execute(message, args, Discord, client);
-	} catch (error) {
-		console.error(error);
-		message.reply('there was an error trying to execute that command!');
-	}
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    
+    if (cmd.length === 0) return;
+    
+    
+    let command = client.commands.get(cmd);
+    
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
 
+    
+    if (command) 
+        command.run(client, message, args);
 });
 
 
