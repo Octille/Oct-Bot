@@ -8,7 +8,7 @@ const mongo = require('./mongo')
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
-client.on('ready', () => {
+client.on('ready', async () => {
 	console.log('Ready!')
 })
 
