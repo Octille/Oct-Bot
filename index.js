@@ -3,7 +3,6 @@ const path = require('path')
 const Discord = require('discord.js');
 const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
-require('dotenv').config()
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
