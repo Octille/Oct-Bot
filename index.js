@@ -17,9 +17,9 @@ client.on('ready', async () => {
 	  } finally {
 		mongoose.connection.close()
 	  }
-	}).catch(() => {
-		console.log('error in fetching posts');
-	  });
+	}).catch(function () {
+		console.log("Promise Rejected");
+   });
 	
 	const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
@@ -39,7 +39,9 @@ const readCommands = (dir) => {
 
 
 readCommands('commands')
-})
+}).catch(function () {
+     console.log("Promise Rejected");
+});
 
 
 
