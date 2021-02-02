@@ -33,7 +33,7 @@ module.exports = {
             } else if (me === reaction.emoji.name) {
                 return message.reply("It's a tie!");
             } else {
-                return message.reply("You won!");
+                return message.reply("You won! ");
             }
         })
         .catch(collected => {
