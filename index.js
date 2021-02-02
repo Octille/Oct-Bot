@@ -17,7 +17,10 @@ client.on('ready', async () => {
 	  } finally {
 		mongoose.connection.close()
 	  }
-	}).catch(err)
+	}).catch(() => {
+		console.log('error in fetching posts');
+	  });
+	
 	const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
 
