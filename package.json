@@ -20,6 +20,7 @@
     "reconlx": "^1.0.8",
     "simple-youtube-api": "^5.2.1",
     "slothpixel": "^1.2.1",
+    "wokcommands": "^1.2.1",
     "youtube-api": "^3.0.1",
     "ytdl-core": "^4.2.0"
   }
