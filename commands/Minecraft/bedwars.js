@@ -5,6 +5,7 @@ const fetch = require('cross-fetch');
 module.exports = {
     name: 'bedwars',
     aliases: ['bw'],
+    description: 'shows bedwars stats',
     async execute(message, args, client) {
 
         if(!args.length) return message.reply('Please provide a valid playername as a parameter.');
