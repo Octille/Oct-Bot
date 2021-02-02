@@ -1,6 +1,6 @@
   
 const Discord = require('discord.js');
-const colors = require('./colors.json');
+const colors = require('../../colors.json');
 const fetch = require('cross-fetch');
 const slothpixel = require('slothpixel');
 const fs = require('fs');
