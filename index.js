@@ -5,10 +5,6 @@ const fetch = require("node-fetch");
 
 const { prefix, token } = require('./config.json');
 
-client.commands = new Collection();
-client.aliases = new Collection();
-
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
