@@ -1,12 +1,16 @@
-const fs = require('fs');
-const Discord = require('discord.js');
-const fetch = require("node-fetch");
-
-
-const { prefix, token } = require('./config.json');
+const { Client, Collection } = require("discord.js");
+const { prefix, token } = require("./token.json")
 
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
+
+const client = new Client({
+    disableEveryone: true
+})
+
+client.commands = new Collection();
+client.aliases = new Collection();
+
 
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
@@ -41,7 +45,6 @@ client.on("message", async message => {
     if (command) 
         command.run(client, message, args);
 });
-
 
 
 
