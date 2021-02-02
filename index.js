@@ -17,7 +17,7 @@ client.on('ready', async () => {
 	  } finally {
 		mongoose.connection.close()
 	  }
-	})
+	}).catch(err)
 	const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
 
@@ -32,7 +32,7 @@ const readCommands = (dir) => {
 	  commandBase(client, option)
 	}
   }
-}
+} 
 
 
 readCommands('commands')
