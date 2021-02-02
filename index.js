@@ -4,24 +4,14 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
 const config = require('./config.json')
-const mongo = require('./mongo')
+const mongo = require('./mongo.jsas')
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
 client.on('ready', async () => {
 	console.log('The client is ready!')
   
-	await mongo().then((mongoose) => {
-	  try {
-		console.log('Connected to mongo!')
-	  } finally {
-		mongoose.connection.close()
-	  }
-	}).catch(function () {
-		console.log("Promise Rejected");
-   });
-	
-	const baseFile = 'command-base.js'
+const baseFile = 'command-base.js'
 const commandBase = require(`./commands/${baseFile}`)
 
 const readCommands = (dir) => {
@@ -39,9 +29,7 @@ const readCommands = (dir) => {
 
 
 readCommands('commands')
-}).catch(function () {
-     console.log("Promise Rejected");
-});
+})
 
 
 
