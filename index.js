@@ -5,6 +5,9 @@ const fetch = require("node-fetch");
 
 const { prefix, token } = require('./config.json');
 
+const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
+client.commands = new Discord.Collection();
+
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
