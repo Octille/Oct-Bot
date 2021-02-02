@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 const { prefix, token } = require('./token.json');
 const WOKCommands = require('wokcommands')
 
-client.once('ready', () => {
+client.on('ready', () => {
 	console.log('Ready!')
 
 	new WOKCommands(client, 'commands')
