@@ -36,8 +36,7 @@ const readCommands = (dir) => {
 
 
 readCommands('commands')
-
-  })
+})
 
 
 
