@@ -1,4 +1,4 @@
-const prefixModel = require("../models/prefix")
+const prefixModel = require("../../models/prefix")
 
 module.exports.run = async (bot, message, args) => {
     const data = await prefixModel.findOne({
