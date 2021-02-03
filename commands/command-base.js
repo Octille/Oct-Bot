@@ -1,8 +1,6 @@
 const command = require('../command');
 const { prefix } = require('../config.json')
 
-process.setMaxListeners(Infinity);
-
 const validatePermissions = (permissions) => {
   const validPermissions = [
     'CREATE_INSTANT_INVITE',
@@ -62,7 +60,7 @@ module.exports = (client, commandOptions) => {
     commands = [commands]
   }
 
-  console.log(`Registering command "${commands}"`)
+  console.log(`Registering command "${commands[0]}"`)
 
   // Ensure the permissions are in an array and are all valid
   if (permissions.length) {
@@ -77,14 +75,14 @@ module.exports = (client, commandOptions) => {
   client.on('message', (message) => {
     const { member, content, guild } = message
 
-    for (const alias of command) {
+    for (const alias of commands) {
       const command = `${prefix}${alias.toLowerCase()}`
 
       if (
         content.toLowerCase().startsWith(`${command} `) ||
         content.toLowerCase() === command
       ) {
-
+        // A command has been ran
 
         // Ensure the user has the required permissions
         for (const permission of permissions) {
