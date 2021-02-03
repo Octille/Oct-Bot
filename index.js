@@ -1,12 +1,6 @@
-const fs = require('fs');
-const path = require('path')
-const Discord = require('discord.js');
-const fetch = require("node-fetch");
-const { prefix, token } = require('./token.json');
-const config = require('./config.json')
-const mongo = require('./mongo.jsas')
-const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
-client.commands = new Discord.Collection();
+const { Client, Collection } = require("discord.js");
+const { config } = require("dotenv");
+const fs = require("fs");
 
 const client = new Client({
     disableEveryone: true
@@ -57,5 +51,4 @@ client.on("message", async message => {
         command.run(client, message, args);
 });
 
-
-client.login(process.env.token);
+client.login(process.env.TOKEN);
