@@ -84,7 +84,7 @@ module.exports = (client, commandOptions) => {
         content.toLowerCase().startsWith(`${command} `) ||
         content.toLowerCase() === command
       ) {
-        // A command has been ran
+
 
         // Ensure the user has the required permissions
         for (const permission of permissions) {
