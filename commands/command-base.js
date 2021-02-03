@@ -80,7 +80,8 @@ module.exports = (client, commandOptions) => {
       const command = `${prefix}${alias.toLowerCase()}`
 
       if (
-        content.toLowerCase().startsWith(`${prefix}${alias.toLowerCase()} `)
+        content.toLowerCase().startsWith(`${command} `) ||
+        content.toLowerCase() === command
       ) {
         // A command has been ran
 
