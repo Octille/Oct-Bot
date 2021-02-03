@@ -2,14 +2,18 @@ const { Client, Collection } = require("discord.js");
 const { config } = require("dotenv");
 const fs = require("fs");
 const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb')
+const MongoDBProvider = require('commando-provider-mongo')
 
-const prefix = require('./models/prefix');
-
-mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/Data', 
-{ 
- useNewUrlParser: true,
- useUnifiedTopology: true
-});
+client.setProvider(
+	MongoClient.connect(config.mongoPath)
+	  .then((client) => {
+		return new MongoDBProvider(client, 'oct bot')
+	  })
+	  .catch((err) => {
+		console.error(err)
+	  })
+  )
 
 const client = new Client({
     disableEveryone: true
@@ -37,7 +41,7 @@ client.on("ready", () => {
 });
 
 client.on("message", async message => {
-    const prefix = "_";
+    const prefix = "!";
 
     if (message.author.bot) return;
     if (!message.guild) return;
