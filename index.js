@@ -1,28 +1,6 @@
 const { Client, Collection } = require("discord.js");
-const { config } = require("dotenv");
+const config = require('./config.json')
 const fs = require("fs");
-const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
-const MongoDBProvider = require('commando-provider-mongo').MongoDBProvider;
-const Commando = require('discord.js-commando')
-
-const client1 = new Commando.CommandoClient({
-	owner: '251120969320497152',
-	commandPrefix: config.prefix,
-  })
-  
-  client1.setProvider(
-	MongoClient.connect(config.mongoPath)
-	  .then((client) => {
-		return new MongoDBProvider(client, 'Oct Bot')
-	  })
-	  .catch((err) => {
-		console.error(err)
-	  })
-  )
-
-
-
 
 const client = new Client({
     disableEveryone: true

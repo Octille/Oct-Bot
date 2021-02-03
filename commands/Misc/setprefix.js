@@ -1,40 +1,43 @@
-const prefixModel = require("../../models/prefix")
+const mongo = require('../../mongo')
+const commandPrefixSchema = require('../../schemas/command-prefix-schema')
 
-module.exports.run = 
-async (bot, message, args) => {
-    const data = await prefixModel.findOne({
-        GuildID: message.guild.id
-    });
-
-    if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
-
-    if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
-
-    if (data) {
-        await prefixModel.findOneAndRemove({
-            GuildID: message.guild.id
-        })
-        
-        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
-
-        let newData = new prefixModel({
-            Prefix: args[0],
-            GuildID: message.guild.id
-        })
-        newData.save();
-    } else if (!data) {
-        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
-
-        let newData = new prefixModel({
-            Prefix: args[0],
-            GuildID: message.guild.id
-        })
-        newData.save();
-    }
-
-}
+// Importing command-base so we have access to the
+// "updateCache" function which I forgot to cover in the video
+const commandBase = require('../command-base')
 
 module.exports = {
-    name: "setprefix",
-    aliases: []
+  commands: 'setprefix',
+  minArgs: 1,
+  maxArgs: 1,
+  expectedArgs: "<This bot's new command prefix>",
+  permissionError: 'You must be an admin to run this command.',
+  permissions: 'ADMINISTRATOR',
+  callback: async (message, arguments, text) => {
+    await mongo().then(async (mongoose) => {
+      try {
+        const guildId = message.guild.id
+        const prefix = arguments[0]
+
+        await commandPrefixSchema.findOneAndUpdate(
+          {
+            _id: guildId,
+          },
+          {
+            _id: guildId,
+            prefix,
+          },
+          {
+            upsert: true,
+          }
+        )
+
+        message.reply(`The prefix for this bot is now ${prefix}`)
+
+        // Update the cache
+        commandBase.updateCache(guildId, prefix)
+      } finally {
+        mongoose.connection.close()
+      }
+    })
+  },
 }
