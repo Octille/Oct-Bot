@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const MongoDBProvider = require('commando-provider-mongo').MongoDBProvider;
 
-const client = new Commando.CommandoClient({
+const client1 = new Commando.CommandoClient({
 	owner: '251120969320497152',
 	commandPrefix: config.prefix,
   })
   
-  client.setProvider(
+  client1.setProvider(
 	MongoClient.connect(config.mongoPath)
 	  .then((client) => {
 		return new MongoDBProvider(client, 'Oct Bot')
