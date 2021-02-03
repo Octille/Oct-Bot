@@ -1,6 +1,6 @@
 const command = require('../command');
 const { prefix } = require('../config.json');
-setMaxListeners(100);
+
 
 const validatePermissions = (permissions) => {
   const validPermissions = [
