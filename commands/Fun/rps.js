@@ -25,7 +25,7 @@ module.exports = {
         // Check if it's a win/tie/loss
         const result = await getResult(reacted, botChoice);
         // Clear the reactions
-        await clearReactions();
+        await MessageReaction.remove()
 
         embed
             .setDescription("")
