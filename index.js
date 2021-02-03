@@ -8,29 +8,54 @@ const mongo = require('./mongo.jsas')
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION"]});
 client.commands = new Discord.Collection();
 
-client.on('ready', async () => {
-	console.log('The client is ready!')
-  
-const baseFile = 'command-base.js'
-const commandBase = require(`./commands/${baseFile}`)
+const client = new Client({
+    disableEveryone: true
+});
 
-const readCommands = (dir) => {
-  const files = fs.readdirSync(path.join(__dirname, dir))
-  for (const file of files) {
-	const stat = fs.lstatSync(path.join(__dirname, dir, file))
-	if (stat.isDirectory()) {
-	  readCommands(path.join(dir, file))
-	} else if (file !== baseFile) {
-	  const option = require(path.join(__dirname, dir, file))
-	  commandBase(client, option)
-	}
-  }
-} 
+client.commands = new Collection();
+client.aliases = new Collection();
 
+client.categories = fs.readdirSync("./commands/");
 
-readCommands('commands')
-})
+config({
+    path: __dirname + "/.env"
+});
 
+["command"].forEach(handler => {
+    require(`./handlers/${handler}`)(client);
+});
+
+client.on("ready", () => {
+    console.log(`Hi, ${client.user.username} is now online!`);
+
+    client.user.setPresence({
+        status: "online",
+        game: {
+            name: "me getting developed",
+            type: "STREAMING"
+        }
+    }); 
+});
+
+client.on("message", async message => {
+    const prefix = "_";
+
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!message.content.startsWith(prefix)) return;
+    if (!message.member) message.member = await message.guild.fetchMember(message);
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    
+    if (cmd.length === 0) return;
+    
+    let command = client.commands.get(cmd);
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+    if (command) 
+        command.run(client, message, args);
+});
 
 
 client.login(process.env.token);
