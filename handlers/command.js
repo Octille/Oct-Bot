@@ -1,8 +1,3 @@
-const mongo = require('../mongo')
-const commandPrefixSchema = require('../schemas/command-prefix-schema.js')
-
-
-
 const { readdirSync } = require("fs");
 
 const ascii = require("ascii-table");
@@ -31,25 +26,3 @@ module.exports = (client) => {
     
     console.log(table.toString());
 }
-
-
-module.exports.updateCache = (guildId, newPrefix) => {
-    guildPrefixes[guildId] = newPrefix
-  }
-  
-  module.exports.loadPrefixes = async (client) => {
-    await mongo().then(async (mongoose) => {
-      try {
-        for (const guild of client.guilds.cache) {
-          const guildId = guild[1].id
-  
-          const result = await commandPrefixSchema.findOne({ _id: guildId })
-          guildPrefixes[guildId] = result.prefix
-        }
-  
-        console.log(guildPrefixes)
-      } finally {
-        mongoose.connection.close()
-      }
-    })
-  }
