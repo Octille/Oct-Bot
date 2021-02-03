@@ -1,6 +1,5 @@
 const command = require('../command');
-const { prefix } = require('../config.json')
-
+const { prefix } = require('../config.json');
 setMaxListeners(100);
 
 const validatePermissions = (permissions) => {
@@ -30,7 +29,7 @@ const validatePermissions = (permissions) => {
     'MUTE_MEMBERS',
     'DEAFEN_MEMBERS',
     'MOVE_MEMBERS',
-    'USE_VAD',
+    'USE_VAD', 
     'CHANGE_NICKNAME',
     'MANAGE_NICKNAMES',
     'MANAGE_ROLES',
