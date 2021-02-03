@@ -60,7 +60,7 @@ module.exports = (client, commandOptions) => {
     commands = [commands]
   }
 
-  console.log(`Registering command "${command}"`)
+  console.log(`registering command "${command}"`)
 
   // Ensure the permissions are in an array and are all valid
   if (permissions.length) {
