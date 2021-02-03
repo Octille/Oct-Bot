@@ -36,9 +36,7 @@ client.on("ready", () => {
     }); 
 });
 
-client.on("message", async message => {
-	client.on('message', async (message) => {
-
+client.on('message', async (message) => {
     if (message.author.bot) return;
 
     //Getting the data from the model
@@ -47,7 +45,7 @@ client.on("message", async message => {
     });
 
     const messageArray = message.content.split(' ');
-    const cmd1 = messageArray[0];
+    const cmd = messageArray[0];
     const args = messageArray.slice(1);
 
     //If there was a data, use the database prefix BUT if there is no data, use the default prefix which you have to set!
@@ -55,18 +53,17 @@ client.on("message", async message => {
         const prefix = data.Prefix;
 
         if (!message.content.startsWith(prefix)) return;
-        const commandfile = client.commands.get(cmd1.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd1.slice(prefix.length)));
+        const commandfile = client.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
         commandfile.run(client, message, args);
     } else if (!data) {
         //set the default prefix here
         const prefix = "!";
         
         if (!message.content.startsWith(prefix)) return;
-        const commandfile = client.commands.get(cmd1.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd1.slice(prefix.length)));
+        const commandfile = client.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
         commandfile.run(client, message, args);
     }
 })
 
-});
 
 client.login(process.env.token);
