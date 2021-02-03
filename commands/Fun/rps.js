@@ -25,7 +25,7 @@ module.exports = {
       
         const result = await getResult(reacted, botChoice);
    
-        await message.reactions.removeAll();
+        message.reactions.removeAll();
 
         embed
             .setDescription("")
