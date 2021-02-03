@@ -2,18 +2,6 @@ const { Client, Collection } = require("discord.js");
 const { config } = require("dotenv");
 const fs = require("fs");
 const mongoose = require('mongoose');
-const { CommandoClient } = require('discord.js-commando');
-const path = require('path');
-
-client.setProvider(
-	MongoClient.connect(config.mongoPath)
-	  .then((client) => {
-		return new MongoDBProvider(client, 'oct bot')
-	  })
-	  .catch((err) => {
-		console.error(err)
-	  })
-  )
 
 const client = new Client({
     disableEveryone: true
@@ -34,8 +22,8 @@ client.on("ready", () => {
     client.user.setPresence({
         status: "online",
         game: {
-            name: "me getting developed",
-            type: "STREAMING"
+            name: "!help",
+            type: "Listening"
         }
     }); 
 });
