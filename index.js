@@ -4,6 +4,7 @@ const fs = require("fs");
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const MongoDBProvider = require('commando-provider-mongo').MongoDBProvider;
+const Commando = require('discord.js-commando')
 
 const client1 = new Commando.CommandoClient({
 	owner: '251120969320497152',
