@@ -1,6 +1,8 @@
 const command = require('../command');
 const { prefix } = require('../config.json')
 
+.setMaxListeners(100)
+
 const validatePermissions = (permissions) => {
   const validPermissions = [
     'CREATE_INSTANT_INVITE',
@@ -55,14 +57,14 @@ module.exports = (client, commandOptions) => {
     callback,
   } = commandOptions
 
-  // Ensure the command and aliases are in an array
+
   if (typeof commands === 'string') {
     commands = [commands]
   }
 
   console.log(`registering command "${command}"`)
 
-  // Ensure the permissions are in an array and are all valid
+
   if (permissions.length) {
     if (typeof permissions === 'string') {
       permissions = [permissions]
@@ -71,7 +73,7 @@ module.exports = (client, commandOptions) => {
     validatePermissions(permissions)
   }
 
-  // Listen for messages
+
   client.on('message', (message) => {
     const { member, content, guild } = message
 
@@ -82,9 +84,7 @@ module.exports = (client, commandOptions) => {
         content.toLowerCase().startsWith(`${command} `) ||
         content.toLowerCase() === command
       ) {
-        // A command has been ran
 
-        // Ensure the user has the required permissions
         for (const permission of permissions) {
           if (!member.hasPermission(permission)) {
             message.reply(permissionError)
@@ -92,7 +92,6 @@ module.exports = (client, commandOptions) => {
           }
         }
 
-        // Ensure the user has the required roles
         for (const requiredRole of requiredRoles) {
           const role = guild.roles.cache.find(
             (role) => role.name === requiredRole
@@ -106,13 +105,13 @@ module.exports = (client, commandOptions) => {
           }
         }
 
-        // Split on any number of spaces
+   
         const arguments = content.split(/[ ]+/)
 
-        // Remove the command which is the first index
+ 
         arguments.shift()
 
-        // Ensure we have the correct number of arguments
+
         if (
           arguments.length < minArgs ||
           (maxArgs !== null && arguments.length > maxArgs)
@@ -123,7 +122,7 @@ module.exports = (client, commandOptions) => {
           return
         }
 
-        // Handle the custom command code
+   
         callback(message, arguments, arguments.join(' '), client)
 
         return
