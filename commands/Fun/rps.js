@@ -1,5 +1,5 @@
-const { RichEmbed } = require("discord.js");
 const { promptMessage } = require("../../functions");
+const discord = require('discord.js');
 
 const chooseArr = ["🗻", "📰", "✂"];
 
