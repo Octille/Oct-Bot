@@ -75,7 +75,7 @@ module.exports = (client, commandOptions) => {
   client.on('message', (message) => {
     const { member, content, guild } = message
 
-    for (const alias of commands) {
+    for (const alias of command) {
       const command = `${prefix}${alias.toLowerCase()}`
 
       if (
