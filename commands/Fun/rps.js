@@ -9,7 +9,7 @@ module.exports = {
     description: "Rock Paper Scissors game. React to one of the emojis to play the game.",
     usage: "rps",
     run: async (client, message, args) => {
-        const embed = new RichEmbed()
+        const embed = new Discord.MessageEmbed()
             .setColor("#ffffff")
             .setFooter(message.guild.me.displayName, client.user.displayAvatarURL)
             .setDescription("Add a reaction to one of these emojis to play the game!")
