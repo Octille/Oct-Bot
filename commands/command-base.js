@@ -1,5 +1,7 @@
 const { prefix } = require('../config.json')
 
+process.setMaxListeners(Infinity);
+
 const validatePermissions = (permissions) => {
   const validPermissions = [
     'CREATE_INSTANT_INVITE',
