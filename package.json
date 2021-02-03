@@ -13,6 +13,7 @@
     "commando-provider-mongo": "^2.0.2",
     "cross-fetch": "^3.0.6",
     "discord.js": "^12.5.1",
+    "discord.js-commando": "github:discordjs/Commando",
     "dotenv": "^8.2.0",
     "eslint": "^7.15.0",
     "fetch": "^1.1.0",
