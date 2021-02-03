@@ -1,43 +1,48 @@
-const discord = require('discord.js')
+const { RichEmbed } = require("discord.js");
+const { promptMessage } = require("../../functions.js");
+
+const chooseArr = ["🗻", "📰", "✂"];
+
 module.exports = {
-	name: "rps",
-	description: "play a game of rock, paper and scissors",
-	run: async(client, message, args) => {
-		let embed = new discord.MessageEmbed()
-		.setTitle("RPS GAME")
-		.setDescription("React to play!")
-		.setTimestamp()
-		let msg = await message.channel.send(embed)
-		await msg.react("🗻")
-		await msg.react("✂")
-		await msg.react("📰")
+    name: "rps",
+    category: "fun",
+    description: "Rock Paper Scissors game. React to one of the emojis to play the game.",
+    usage: "rps",
+    run: async (client, message, args) => {
+        const embed = new RichEmbed()
+            .setColor("#ffffff")
+            .setFooter(message.guild.me.displayName, client.user.displayAvatarURL)
+            .setDescription("Add a reaction to one of these emojis to play the game!")
+            .setTimestamp();
 
-		const filter = (reaction, user) => {
-            return ['🗻', '✂', '📰'].includes(reaction.emoji.name) && user.id === message.author.id;
-        }
+        const m = await message.channel.send(embed);
+        // Wait for a reaction to be added
+        const reacted = await promptMessage(m, message.author, 30, chooseArr);
 
-        const choices = ['🗻', '✂', '📰']
-        const me = choices[Math.floor(Math.random() * choices.length)]
-        msg.awaitReactions(filter, {max:1, time: 60000, error: ["time"]}).then(
-        	async(collected) => {
-        		const reaction = collected.first()
-        		let result = new discord.MessageEmbed()
-        		.setTitle("RESULT")
-        		.addField("Your choice", `${reaction.emoji.name}`)
-        		.addField("My choice", `${me}`)
-			await msg.edit(result)
-        		if ((me === "🗻" && reaction.emoji.name === "✂") ||
-                (me === "📰" && reaction.emoji.name === "🗻") ||
-                (me === "✂" && reaction.emoji.name === "📰")) {
-                    message.reply("You lost!");
-            } else if (me === reaction.emoji.name) {
-                return message.reply("It's a tie!");
+        // Get a random emoji from the array
+        const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];
+
+        // Check if it's a win/tie/loss
+        const result = await getResult(reacted, botChoice);
+        // Clear the reactions
+        await m.clearReactions();
+
+        embed
+            .setDescription("")
+            .addField(result, `${reacted} vs ${botChoice}`);
+
+        m.edit(embed);
+
+        function getResult(me, clientChosen) {
+            if ((me === "🗻" && clientChosen === "✂") ||
+                (me === "📰" && clientChosen === "🗻") ||
+                (me === "✂" && clientChosen === "📰")) {
+                    return "You won!";
+            } else if (me === clientChosen) {
+                return "It's a tie!";
             } else {
-                return message.reply("You won! ");
+                return "You lost!";
             }
-        })
-        .catch(collected => {
-                message.reply('Process has been cancelled since you did not respond in time!');
-            })
-}
+        }
+    }
 }
