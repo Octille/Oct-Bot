@@ -2,8 +2,8 @@ const { Client, Collection } = require("discord.js");
 const { config } = require("dotenv");
 const fs = require("fs");
 const mongoose = require('mongoose');
-const { MongoClient } = require('mongodb')
-const MongoDBProvider = require('commando-provider-mongo')
+const MongoClient = require('mongodb').MongoClient;
+const MongoDBProvider = require('commando-provider-mongo').MongoDBProvider;
 
 client.setProvider(
 	MongoClient.connect(config.mongoPath)
