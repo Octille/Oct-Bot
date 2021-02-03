@@ -1,5 +1,5 @@
 const mongo = require('../../mongo')
-const commandPrefixSchema = require('../../schemas/command-prefix-schema')
+const commandPrefixSchema = require('../../schemas/command-prefix-schema.js')
 
 // Importing command-base so we have access to the
 // "updateCache" function which I forgot to cover in the video
