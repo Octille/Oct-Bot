@@ -7,8 +7,8 @@ module.exports = {
 
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
-        .setTitle(`Cleared messaged`)
-        .setDescription('Successfully deleted \`${deleted.size}\` message(s)')
+        .setTitle(`Cleared Messages`)
+        .setDescription('Successfully deleted \`${deleted.size}\` messages')
 
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
 
@@ -20,7 +20,7 @@ module.exports = {
 
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
-            .then(deleted => message.channel.send(embed))
+            .then(deleted => message.channel.send(`I deleted \`${deleted.size}\` messages.`))
             .catch(err => message.reply(`Something went wrong... ${err}`));
             
     });
