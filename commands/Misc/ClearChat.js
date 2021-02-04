@@ -16,9 +16,9 @@ module.exports = {
             message.channel.bulkDelete(messages)
             
             const embed = new discord.MessageEmbed()
-            .setColor("RANDOM")
             .setTitle(`Cleared messaged`)
-            .description('successfully deleted ${meesage.size} messages')
+            .setDescription('successfully deleted ${meesage.size} messages')
+            .setColor("RANDOM")
             
             message.channel.send(embed);
     });
