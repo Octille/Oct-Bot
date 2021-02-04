@@ -1,7 +1,8 @@
-const { Discord, Client, Collection } = require("discord.js");
+
+const Discord = require('discord.js');
 const config = require('./config.json')
 const fs = require("fs");
-const role = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 
 const client = new Client({
