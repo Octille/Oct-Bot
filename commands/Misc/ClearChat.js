@@ -21,13 +21,12 @@ module.exports = {
             const embed = new discord.MessageEmbed()
             .setColor("RANDOM")
             .setTitle(`Cleared Messages`)
-            .addFooter(`Successfully deleted ${deleted.size} messages!`)
-            try{
-                message.channel.send(embed)
-            }catch{
-                message.channel.send("ERROR.")
-            }
-            })
+            .addField(`Successfully deleted ${deleted.size} messages!`)
+            
+            message.channel.send(embed)
+
+            }).catch(err => message.reply(`Something went wrong... ${err}`));
+            )
             
     });
 
