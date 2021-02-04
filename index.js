@@ -5,10 +5,6 @@ const fs = require("fs");
 const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
 
-const client = new Client({
-    disableEveryone: true
-});
-
 client.commands = new Collection();
 client.aliases = new Collection();
 
