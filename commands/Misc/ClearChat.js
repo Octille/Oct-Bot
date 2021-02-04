@@ -4,11 +4,12 @@ module.exports = {
     name: 'clear',
     description: "Clear messages!",
     run: async (client, message, args) => {
+        const amount = deleted.size
 
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle(`Cleared Messages`)
-        .addField(`Successfully deleted ${deleted.size} messages!`)
+        .addField(`Successfully deleted ${amount} messages!`)
 
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
 
