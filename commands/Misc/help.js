@@ -1,57 +1,42 @@
-const discord = require('discord.js');
-const { stripIndents } = require("common-tags");
-
-module.exports = {
-    name: "help",
-    aliases: ["h"],
-    category: "info",
-    description: "Returns all commands, or one specific command info",
-    usage: "[command | alias]",
-    run: async (client, message, args) => {
-        if (args[0]) {
-            return getCMD(client, message, args[0]);
+module.exports.run = async (bot, message, args) => {
+    function getMenu() {
+     var hpmenu = {};
+     return new Promise(function(resolve, reject) {
+      dashboard.readServerBoundValue(
+       `${message.guild.id}`,
+       'PREFIX',
+       async function(output) {
+        if (output) {
+         var prefixxx = output;
         } else {
-            return getAll(client, message);
+         var prefixxx = config.botPrefix;
         }
+        //=====================================================================================================
+        fs.readdir('./src/commands/', (err2, files2) => {
+         files2.forEach((f2, i2) => {
+          hpmenu[f2] = new discord.MessageEmbed();
+          hpmenu[f2].setTitle(`${f2}`);
+          console.log('Added catagory ' + f2);
+          //=========================================================================================
+          fs.readdir(`./src/commands/${f2}`, (err, files) => {
+           files.forEach((f, i) => {
+            const cmd = f.replace('.js', '');
+            hpmenu[f2].addField(cmd, 'test');
+            console.log('Added command ' + cmd);
+            //=====================================================================================================
+           });
+           resolve(hpmenu);
+          });
+         });
+        });
+       }
+      );
+     });
     }
-}
-
-function getAll(client, message) {
-    const embed = new discord.MessageEmbed()
-        .setColor("RANDOM")
-
-    const commands = (category) => {
-        return client.commands
-            .filter(cmd => cmd.category === category)
-            .map(cmd => `- \`${cmd.name}\``)
-            .join("\n");
+   
+    async function main() {
+     var output = await getMenu();
+     message.channel.send(output['developer']);
     }
-
-    const info = client.categories
-        .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
-        .reduce((string, category) => string + "\n" + category);
-
-    return message.channel.send(embed.setDescription(info));
-}
-
-function getCMD(client, message, input) {
-    const embed = new discord.MessageEmbed()
-
-    const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
-    
-    let info = `No information found for command **${input.toLowerCase()}**`;
-
-    if (!cmd) {
-        return message.channel.send(embed.setColor("RED").setDescription(info));
-    }
-
-    if (cmd.name) info = `**Command name**: ${cmd.name}`;
-    if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
-    if (cmd.description) info += `\n**Description**: ${cmd.description}`;
-    if (cmd.usage) {
-        info += `\n**Usage**: ${cmd.usage}`;
-        embed.setFooter(`Syntax: <> = required, [] = optional`);
-    }
-
-    return message.channel.send(embed.setColor("GREEN").setDescription(info));
-}
+    main();
+   };
