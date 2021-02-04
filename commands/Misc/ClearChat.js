@@ -22,7 +22,7 @@ module.exports = {
             .setColor("RANDOM")
             .setTitle(`Cleared Messages`)
             .addField(`Successfully deleted ${deleted.size} messages!`)
-            message.channel.send(embed)
+            
 
             try{
                 message.channel.send(embed)
