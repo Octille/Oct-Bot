@@ -1,9 +1,19 @@
-const discord = require("discord.js");
+
 
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
     run: async (client, message, args) => {
+
+        const embed = new discord.MessageEmbed()
+        .setColor("RANDOM")
+        .setTitle(`Cleared messaged`)
+        .description('successfully deleted ${meesage.size} messages')
+
+
+
+
+
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
 
         if(isNaN(args[0])) return message.reply("Please type a real number!");
@@ -14,13 +24,8 @@ module.exports = {
 
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
-            
-            const embed = new discord.MessageEmbed()
-            .setTitle(`Cleared messaged`)
-            .setDescription('successfully deleted ${messages.size} messages')
-            .setColor("RANDOM")
-            
-            message.channel.send(embed);
+            .then(messages => message.chanel.send(embed))
+           
     });
 
  }
