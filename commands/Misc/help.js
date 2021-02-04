@@ -1,4 +1,6 @@
-module.exports.run = async (bot, message, args) => {
+module.export = {
+name: 'help',
+run: async (bot, message, args) => {
     function getMenu() {
      var hpmenu = {};
      return new Promise(function(resolve, reject) {
@@ -39,4 +41,5 @@ module.exports.run = async (bot, message, args) => {
      message.channel.send(output['developer']);
     }
     main();
-   };
+   },
+}
