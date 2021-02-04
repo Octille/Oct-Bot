@@ -8,7 +8,7 @@ module.exports = {
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle(`Cleared messaged`)
-        .description('successfully deleted ${meesage.size} messages')
+        .setDescription('successfully deleted ${meesage.size} messages')
 
 
 
