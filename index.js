@@ -11,28 +11,32 @@ client.aliases = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
 
-config({
-    path: __dirname + "/.env"
-});
-
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
+var used1 = false;
+
 client.on("ready", () => {
     console.log(`Hi, ${client.user.username} is now online!`);
-
-    client.user.setPresence({
-        status: "online",
-        game: {
-            name: "me getting developed",
-            type: "STREAMING"
+    setInterval(() => {
+        if (used1) {
+          client.user.setActivity("c!help", {
+            type: "LISTENING",
+            status: "idle",
+          });
+          used1 = false;
+        } else {
+          client.user.setActivity("your webcam!", {
+            type: "WATCHING",
+          });
+          used1 = true;
         }
-    }); 
+      }, 3000);
 });
 
 client.on("message", async message => {
-    const prefix = "!";
+    const prefix = "";
 
     if (message.author.bot) return;
     if (!message.guild) return;
