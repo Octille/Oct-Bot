@@ -1,5 +1,5 @@
 module.export = {
-name: 'help',
+name: "help",
 description: "help",
 run: async (bot, message, args) => {
     function getMenu() {
