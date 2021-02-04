@@ -1,3 +1,5 @@
+const discord = require("discord.js");
+
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
@@ -12,6 +14,13 @@ module.exports = {
 
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
+            
+            const embed = new discord.MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle(`Cleared messaged`)
+            .description('successfully deleted ${meesage.size} messages')
+            
+            message.channel.send(embed);
     });
 
  }
