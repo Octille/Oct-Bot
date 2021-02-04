@@ -11,6 +11,10 @@ client.aliases = new Collection();
 
 client.categories = fs.readdirSync("./commands/");
 
+config({
+    path: __dirname + "/.env"
+});
+
 ["command"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
@@ -21,13 +25,14 @@ client.on("ready", () => {
     client.user.setPresence({
         status: "online",
         game: {
-            name: "!help",
-            type: "Listening"
+            name: "me getting developed",
+            type: "STREAMING"
         }
     }); 
 });
 
 client.on("message", async message => {
+    const prefix = "!";
 
     if (message.author.bot) return;
     if (!message.guild) return;
@@ -45,7 +50,6 @@ client.on("message", async message => {
     if (command) 
         command.run(client, message, args);
 });
-
 
 
 client.login(process.env.token);
