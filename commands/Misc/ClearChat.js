@@ -20,7 +20,7 @@ module.exports = {
 
         await message.channel.messages.fetch({ limit: args[0]}).then(messages =>{
             message.channel.bulkDelete(messages)
-            .then(deleted => message.channel.send(`I deleted \`${deleted.size}\` messages.`))
+            .then(deleted => message.channel.send(`Successfully deleted \`${deleted.size}\` messages!`))
             .catch(err => message.reply(`Something went wrong... ${err}`));
             
     });
