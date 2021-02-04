@@ -2,7 +2,7 @@
 	name: 'reload',
 	description: 'Reloads a command',
 	args: true,
-	execute(message, args) {
+	run: async (client, message, args) => {
 		const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName)
 			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

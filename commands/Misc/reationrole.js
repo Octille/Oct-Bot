@@ -1,7 +1,7 @@
  module.exports = {
     name: 'reactionrole',
     description: "Sets up a reaction role message!",
-    async execute(message, args, Discord, client) {
+    run: async (client, message, args, discord, client) =>{
         if(message.member.roles.cache.has('627526794463150100')){
             message.delete()
             const channel = '786657488304341023';
