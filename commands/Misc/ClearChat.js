@@ -8,10 +8,7 @@ module.exports = {
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle(`Cleared messaged`)
-        .setDescription('Successfully deleted ${amount} message(s)')
-        
-        message.channel.send(embed)
-
+        .setDescription('Successfully deleted \`${deleted.size}\` message(s)')
 
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
 
