@@ -21,14 +21,14 @@ client.on("ready", () => {
     console.log(`Hi, ${client.user.username} is now online!`);
     setInterval(() => {
         if (used1) {
-          client.user.setActivity("c!help", {
+          client.user.setActivity("!help", {
             type: "LISTENING",
             status: "idle",
           });
           used1 = false;
         } else {
-          client.user.setActivity("your webcam!", {
-            type: "WATCHING",
+          client.user.setActivity("Me Getting Developed", {
+            type: "STREAMING",
           });
           used1 = true;
         }
@@ -36,7 +36,7 @@ client.on("ready", () => {
 });
 
 client.on("message", async message => {
-    const prefix = "";
+    const prefix = "!";
 
     if (message.author.bot) return;
     if (!message.guild) return;
