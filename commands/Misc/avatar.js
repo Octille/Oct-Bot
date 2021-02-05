@@ -5,7 +5,7 @@ module.exports = {
     description: "Brodcast someone's avatar",
 
     run: async (client, message, args) => {
-          const embed = new Discord.RichEmbed()
+          const embed = new discord.MessageEmbed()
                         .setImage(user.avatarURL)
                         .setColor("RANDOM")
          message.channel.send({embed});
