@@ -1,5 +1,4 @@
 const { DataResolver } = require("discord.js")
-const { execute } = require("./reationrole")
 
 module.exports = {
     name: 'kick',
