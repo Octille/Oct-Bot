@@ -2,6 +2,8 @@ const { discord, Collection } = require("discord.js");
 const config = require('./config.json')
 const fs = require("fs");
 
+client.commands = new Discord.Collection();
+
 const client =new discord.client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
 client.commands = new Collection();
