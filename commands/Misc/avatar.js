@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const discord = require('discord.js');
 
 module.exports = {
     name: "avatar",
@@ -8,6 +8,6 @@ module.exports = {
           const embed = new discord.MessageEmbed()
                         .setImage(user.avatarURL)
                         .setColor("RANDOM")
-         message.channel.send({embed});
+         message.channel.send(embed);
       }
 }
