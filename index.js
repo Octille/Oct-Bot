@@ -1,11 +1,10 @@
-const Discord = require('discord.js');
- 
-const Client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const { Client, Collection } = require("discord.js");
 const config = require('./config.json')
 const fs = require("fs");
-const { client } = require("discord.js");
 
-
+const client = new Client({
+    disableEveryone: true
+});
 
 client.commands = new Collection();
 client.aliases = new Collection();
@@ -49,7 +48,7 @@ client.on("message", async message => {
     
     if (cmd.length === 0) return;
     
-    let command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.incudes(cmd));
+    let command = client.commands.get(cmd);
     if (!command) command = client.commands.get(client.aliases.get(cmd));
 
     if (command) 
