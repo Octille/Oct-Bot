@@ -7,7 +7,7 @@ const discord = require('discord.js');
         let pollChannel = message.mentions.channels.first();
         let pollDescription = args.slice(1).join(' ');
 
-        let embedPoll = new Discord.MessageEmbed()
+        let embedPoll = new discord.MessageEmbed()
         .setTitle('pole created')
         .setDescription(pollDescription)
         .setColor('YELLOW')
