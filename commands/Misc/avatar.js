@@ -1,4 +1,5 @@
 const discord = require('discord.js');
+const UserPFP = message.member.avatarURL();
 
 module.exports = {
     name: "avatar",
@@ -6,7 +7,7 @@ module.exports = {
 
     run: async (client, message, args) => {
           const embed = new discord.MessageEmbed()
-                        .setImage(user.avatarURL)
+                        .setImage(UserPFP)
                         .setColor("RANDOM")
          message.channel.send(embed);
       }
