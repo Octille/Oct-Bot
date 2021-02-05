@@ -2,7 +2,7 @@ const { discord, Collection } = require("discord.js");
 const config = require('./config.json')
 const fs = require("fs");
 
-const client =new discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const client =new discord.client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
 client.commands = new Collection();
 client.aliases = new Collection();
