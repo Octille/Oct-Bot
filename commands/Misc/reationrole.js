@@ -5,11 +5,17 @@ const discord = require('discord.js');
     description: "Sets up a reaction role message!",
     run: async (client, message, args) => {
     message.delete()
+    const yellowTeamEmoji = '✅';
+
+
+
     const embed = new discord.MessageEmbed()
     .setTitle("Verification")
     .setDescription("React to the check mark emoji to verifi \n \n please read the rules befor verifing")
-    const msgEmbed = await message.channel.send(embed)
-    msgEmbed.react('✅')
+    message.channel.send(embed)
+    
+    let messageEmbed = await message.channel.send(embed);
+    messageEmbed.react(yellowTeamEmoji);
 
 }
  }
