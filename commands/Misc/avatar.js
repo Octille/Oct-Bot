@@ -9,11 +9,11 @@ module.exports = {
 
     const embed = new discord.MessageEmbed()
     .setTitle('Your Avatar')
-    .setdescription(`${message.author.displayAvatarURL({ dynamic: true })}`)
+    .setDescription(`${message.author.displayAvatarURL({ dynamic: true })}`)
 
     const embed1 = new discord.MessageEmbed()
     .setTitle(`${user.username}'s Avatar`)
-    .setdescription(`${user.displayAvatarURL({ dynamic: true })}`)
+    .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
 
 
   
