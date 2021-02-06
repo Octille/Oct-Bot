@@ -45,10 +45,11 @@ client.on("message", async message => {
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
+    const a = cmd
     
     if (cmd.length === 0) return;
     
-    let command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.incudes(cmd));
+    let command = client.commands.get(cmd) || client.commands.find(commands => commands.aliases && commands.aliases.incudes(cmd));
     if (!command) command = client.commands.get(client.aliases.get(cmd));
 
     if (command) 
