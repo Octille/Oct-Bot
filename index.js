@@ -49,7 +49,7 @@ client.on("message", async message => {
     
     if (commandname.length === 0) return;
     
-    let command = client.commands.get(commandname) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    let command = client.commands.get(commandname) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandname));
     if (!command) command = client.commands.get(client.aliases.get(commandname));
 
     if (command) 
