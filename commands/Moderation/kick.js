@@ -3,7 +3,7 @@ const discord = require('discord.js')
 module.exports = {
     name: 'kick',
     description: "This command kicks a member!",
-    execute(message, args){
+    run: async (client, message, args) =>{
         if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.sned('You Need Permistions To Run This Command!')
 
         const embed = new discord.MessageEmbed()
