@@ -9,10 +9,8 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
       .setTitle("Avatar Request : " + user.username)
-      .setImage(user.displayAvatarURL())
+      .setImage(user.displayAvatarURL({ dynamic: true }))
       .setColor("GREEN")
-      .setFooter(`Requested by ${message.author.username}`)
-      .setTimestamp();
 
     message.channel.send(embed);
   },
