@@ -11,7 +11,7 @@ module.exports = {
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle('Member Kicked')
-        .setDescription("I have successfully kicked n/" + user.username)
+        .setDescription("I have successfully kicked @" + user.username)
 
 
         const target = message.mentions.users.first();
