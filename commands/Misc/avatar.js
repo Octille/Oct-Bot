@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = {
   name: "avatar",
   description: "get a user's avatar",
-  async execute(message, args) {
+  run: async (client, message, args) => {
     const user = message.mentions.users.first() || message.author;
 
     const embed = new Discord.MessageEmbed()
