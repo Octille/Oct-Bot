@@ -6,7 +6,7 @@ module.exports = {
     name: 'bedwars',
     aliases: ['bw'],
     description: 'shows bedwars stats',
-    async execute(message, args, client) {
+    run: async (client, message, args) => {
 
         if(!args.length) return message.reply('Please provide a valid playername as a parameter.');
 
