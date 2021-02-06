@@ -24,8 +24,8 @@ module.exports = {
       }
 
       const avatar_list = message.mentions.users.map(user => {
-          return message.channel.send(embed1);
+          return (embed1);
       });
-
+      message.channel.send(avatar_list);
   }
 }
