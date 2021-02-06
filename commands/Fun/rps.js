@@ -4,7 +4,8 @@ const discord = require('discord.js');
 const chooseArr = ["🗻", "📰", "✂"];
 
 module.exports = {
-    name: "rps",
+    name: "rockpapersisscors",
+    aliases: ['rps'],
     category: "fun",
     description: "Rock Paper Scissors game. React to one of the emojis to play the game.",
     usage: "rps",
