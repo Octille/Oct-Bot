@@ -20,7 +20,7 @@ module.exports = {
                 {name: 'Max Players', value: response.maxPlayers},
                 {name: 'Version', value: response.version}
             )
-            .setFooter('Mc server util by CodeLyon');
+            
  
             message.channel.send(embed);
         })
