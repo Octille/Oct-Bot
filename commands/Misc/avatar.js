@@ -6,15 +6,15 @@ module.exports = {
   description: 'Return a user(s) avatar picture!',
 
   run: async (client, message, args) => {
-    const user = message.mentions.users.size
+   
 
     const embed = new discord.MessageEmbed()
     .setTitle('Your Avatar')
-    .setDescription(`${message.author.displayAvatarURL({ dynamic: true })}`)
+    .setImage(`${message.author.displayAvatarURL({ dynamic: true })}`)
 
     const embed1 = new discord.MessageEmbed()
     .setTitle(`${user.username}'s Avatar`)
-    .setDescription(`${user.displayAvatarURL({ dynamic: true })}`)
+    .setImage(`${user.displayAvatarURL({ dynamic: true })}`)
 
 
   
