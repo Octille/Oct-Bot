@@ -1,31 +1,19 @@
 const discord = require('discord.js')
+const Discord = require("discord.js");
 
 module.exports = {
-  name: 'avatar',
-  aliases: ['icon', 'pfp', 'profilepic'],
-  description: 'Return a user(s) avatar picture!',
+  name: "avatar",
+  description: "get a user's avatar",
+  async execute(message, args) {
+    const user = message.mentions.users.first() || message.author;
 
-  run: async (client, message, args) => {
-   
+    const embed = new Discord.MessageEmbed()
+      .setTitle("Avatar Request : " + user.username)
+      .setImage(user.displayAvatarURL())
+      .setColor("GREEN")
+      .setFooter(`Requested by ${message.author.username}`)
+      .setTimestamp();
 
-    const embed = new discord.MessageEmbed()
-    .setTitle('Your Avatar')
-    .setImage(${message.author.displayAvatarURL({ dynamic: true })})
-
-    const embed1 = new discord.MessageEmbed()
-    .setTitle(`${user.username}'s Avatar`)
-    .setImage(${user.displayAvatarURL({ dynamic: true })})
-
-
-  
-
-      if (!message.mentions.users.size) {
-          return message.channel.send(embed);
-      }
-
-      const avatar_list = message.mentions.users.map(user => {
-          return (embed1);
-      });
-      message.channel.send(avatar_list);
-  }
-}
+    message.channel.send(embed);
+  },
+};
