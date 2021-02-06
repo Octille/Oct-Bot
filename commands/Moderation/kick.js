@@ -8,7 +8,7 @@ module.exports = {
 
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
-        .settitle('Member Kicked')
+        .setTitle('Member Kicked')
         .setDescription(`I have successfully kicked ${user.username}`)
 
 
