@@ -4,7 +4,7 @@ module.exports = {
     name: 'kick',
     description: "This command kicks a member!",
     run: async (client, message, args) =>{
-        if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.sned('You Need Permistions To Run This Command!')
+        if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send('You Need Permistions To Run This Command!')
 
         const user = message.mentions.users.first() || message.author;
 
