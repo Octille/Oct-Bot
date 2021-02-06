@@ -18,7 +18,7 @@ module.exports = {
             memberTarget.kick();
             message.channel.send(embed);
         }else{
-            message.channel.send(`You coudn't kick that member!`);
+            message.channel.send(`you coudn't kick that member!`);
         }
     }
 }
