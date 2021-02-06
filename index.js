@@ -44,13 +44,13 @@ client.on("message", async message => {
     if (!message.member) message.member = await message.guild.fetchMember(message);
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const cmd = args.shift().toLowerCase();
-    const a = cmd
+    const commandname = args.shift().toLowerCase();
+   
     
-    if (cmd.length === 0) return;
+    if (commandname.length === 0) return;
     
-    let command = client.commands.get(cmd) || client.commands.find(commands => commands.aliases && commands.aliases.incudes(cmd));
-    if (!command) command = client.commands.get(client.aliases.get(cmd));
+    let command = client.commands.get(commandname) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+    if (!command) command = client.commands.get(client.aliases.get(commandname));
 
     if (command) 
         command.run(client, message, args);
