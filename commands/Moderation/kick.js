@@ -11,7 +11,7 @@ module.exports = {
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle('Member Kicked')
-        .setDescription("I have successfully kicked" + user.username)
+        .setDescription("I have successfully kicked n/" + user.username)
 
 
         const target = message.mentions.users.first();
@@ -20,7 +20,7 @@ module.exports = {
             memberTarget.kick();
             message.channel.send(embed);
         }else{
-            message.channel.send(`you coudn't kick that member!`);
+            message.channel.send(`you didnt menstion a member i can kick`);
         }
     }
 }
