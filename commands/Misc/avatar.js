@@ -7,11 +7,11 @@ module.exports = {
 
   run: async (client, message, args) => {
 
-    const embed = discord.MessageEmbed()
+    const embed = new discord.MessageEmbed()
     .setTitle('Your Avatar')
     .setdescription(`${message.author.displayAvatarURL({ dynamic: true })}`)
 
-    const embed1 = discord.MessageEmbed()
+    const embed1 = new discord.MessageEmbed()
     .setTitle(`${user.username}'s Avatar`)
     .setdescription(`${user.displayAvatarURL({ dynamic: true })}`)
 
