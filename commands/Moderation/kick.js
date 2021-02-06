@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.sned('You Need Permistions To Run This Command!')
 
         const embed = new discord.MessageEmbed()
-        .setcolor("RANDOM")
+        .setColor("RANDOM")
         .settitle('Member Kicked')
         .setDescription(`I have successfully kicked ${user.username}`)
 
