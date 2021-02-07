@@ -19,6 +19,7 @@
     "dotenv": "^8.2.0",
     "eslint": "^7.15.0",
     "fetch": "^1.1.0",
+    "ffmpeg": "0.0.4",
     "get": "^1.4.0",
     "got": "^11.8.0",
     "minecraft-server-util": "^3.4.2",
