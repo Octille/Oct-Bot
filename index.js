@@ -53,7 +53,7 @@ client.on("message", async message => {
     if (!command) command = client.commands.get(client.aliases.get(commandname));
 
     if (command) 
-        command.run(client, message, args);
+        command.run(client, message, args, cmd);
 });
 
 
