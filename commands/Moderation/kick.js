@@ -20,7 +20,7 @@ module.exports = {
             memberTarget.kick();
             message.channel.send(embed);
         }else{
-            message.channel.send(`you didnt menstion a member i can kick`);
+            message.channel.send(`you didnt @ a member i can kick`);
         }
     }
 }
