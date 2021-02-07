@@ -9,7 +9,7 @@ module.exports = {
     aliases: ['skip', 'stop'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
     cooldown: 0,
     description: 'Advanced music bot',
-    run: async (client, message, args, cmd) => {
+    run: async (client, message, args, cmd) =>{
 
 
         //Checking for the voicechannel and permissions (you can add more permissions if you like).
@@ -24,23 +24,27 @@ module.exports = {
 
         //If the user has used the play command
         if (cmd === 'play'){
-          if(!args.length) return message.channel.channel('You need to send the 2nd argument!');
-          let song = {};
-          if (ytdl.validateURL(args[0])) {
-            const song_info = await ytdl.getInfo(args[0]);
-            song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
-          } else {
-            const video_finder = async (query) =>{
-              const videoResults = await ytSearch(query);
-              return (videoResults.videos.length > 1) ? videoResults.videos[0] : null;
-            }
-            const video = await video_finder(args.join(' '))
-            if (video){
-              song = { title : video.title, url: video.url }
+            if (!args.length) return message.channel.send('You need to send the second argument!');
+            let song = {};
+
+            //If the first argument is a link. Set the song object to have two keys. Title and URl.
+            if (ytdl.validateURL(args[0])) {
+                const song_info = await ytdl.getInfo(args[0]);
+                song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
             } else {
-              message.channel.send('Error finding video')
+                //If there was no link, we use keywords to search for a video. Set the song object to have two keys. Title and URl.
+                const video_finder = async (query) =>{
+                    const video_result = await ytSearch(query);
+                    return (video_result.videos.length > 1) ? video_result.videos[0] : null;
+                }
+
+                const video = await video_finder(args.join(' '));
+                if (video){
+                    song = { title: video.title, url: video.url }
+                } else {
+                     message.channel.send('Error finding video.');
+                }
             }
-          }
 
             //If the server queue does not exist (which doesn't for the first video queued) then create a constructor to be added to our global queue.
             if (!server_queue){
