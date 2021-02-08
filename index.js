@@ -3,7 +3,11 @@ const config = require('./config.json')
 const fs = require("fs");
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/Data', 
+{ useNewUrlParser: true, 
+  useUnifiedTopology: true })
+
+  const prefix = require('./models/prefix')
 
 const client = new Client({
     disableEveryone: true
@@ -39,7 +43,15 @@ client.on("ready", () => {
 });
 
 client.on("message", async message => {
-    const prefix = "!";
+
+  const data = await prefix.findOne({
+    GuildID: message.guild.id
+})
+
+
+
+
+    
 
     if (message.author.bot) return;
     if (!message.guild) return;
@@ -49,14 +61,29 @@ client.on("message", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd= args.shift().toLowerCase();
    
-    
-    if (cmd.length === 0) return;
-    
-    let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
-    if (!command) command = client.commands.get(client.aliases.get(cmd));
+    if(data) {
+      const prefix = data.Prefix;
 
-    if (command) 
-        command.run(client, message, args, cmd);
+      if (cmd.length === 0) return;
+    
+      let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
+      if (!command) command = client.commands.get(client.aliases.get(cmd));
+  
+      if (command) 
+          command.run(client, message, args, cmd);
+    }else if (!data) {
+      const prefix = "!";
+
+
+      if (cmd.length === 0) return;
+    
+      let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
+      if (!command) command = client.commands.get(client.aliases.get(cmd));
+  
+      if (command) 
+          command.run(client, message, args, cmd);
+    }
+
 });
 
 
