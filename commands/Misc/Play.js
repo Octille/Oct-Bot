@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
+    aliases: ['skip', 'stop', 's', 'p'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
     cooldown: 0,
     description: 'Advanced music bot',
     run: async (client, message, args, cmd) =>{
@@ -24,7 +24,7 @@ module.exports = {
         const server_queue = queue.get(message.guild.id);
 
         //If the user has used the play command
-        if (cmd === 'play'){
+        if (cmd === 'play', 's'){
             if (!args.length) return message.channel.send('You need to send the second argument!');
             let song = {};
 
@@ -77,7 +77,7 @@ module.exports = {
             }
         }
 
-        else if(cmd === 'skip') skip_song(message, server_queue);
+        else if(cmd === 'skip', 's') skip_song(message, server_queue);
         else if(cmd === 'stop') stop_song(message, server_queue);
     }
     
