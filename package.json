@@ -12,6 +12,7 @@
   "author": "Gurkirat",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
     "ascii-table": "0.0.9",
     "commando-provider-mongo": "^2.0.2",
     "cross-fetch": "^3.0.6",
