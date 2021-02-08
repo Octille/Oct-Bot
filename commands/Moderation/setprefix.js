@@ -2,8 +2,8 @@ const prefixModel = require("../../models/prefix")
 
 module.exports = {
     name:'setprefix',
-    description: 'sets a prefix for your server', 
-   run: async (client, message, args) =>{
+    description: 'sets a new prefix for your server',
+    run: async (client, message, args) =>{
     const data = await prefixModel.findOne({
         GuildID: message.guild.id
     });

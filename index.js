@@ -3,7 +3,7 @@ const config = require('./config.json')
 const fs = require("fs");
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/Data', 
+mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/data', 
 { useNewUrlParser: true, 
   useUnifiedTopology: true })
 
@@ -48,10 +48,6 @@ client.on("message", async message => {
     GuildID: message.guild.id
 })
 
-
-
-
-    
 
     if (message.author.bot) return;
     if (!message.guild) return;
