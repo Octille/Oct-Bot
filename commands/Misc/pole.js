@@ -8,8 +8,9 @@ const discord = require('discord.js');
         let pollDescription = args.slice(1).join(' ');
 
         let embedPoll = new discord.MessageEmbed()
-        .setTitle('pole created')
+        .setTitle('New Pole!')
         .setDescription(pollDescription)
+        .addField('Suthor:' + message.author)
         .setColor('YELLOW')
         let msgEmbed = await pollChannel.send(embedPoll);
         await msgEmbed.react('👍')
