@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop', 's', 'p'], //We are using aliases to run the skip and stop command follow this tutorial if lost: https://www.youtube.com/watch?v=QBUJ3cdofqc
+    aliases: ['skip', 'stop','p'],
     cooldown: 0,
     description: 'Advanced music bot',
     run: async (client, message, args, cmd) =>{
@@ -77,7 +77,7 @@ module.exports = {
             }
         }
 
-        else if(cmd === 'skip', 's') skip_song(message, server_queue);
+        else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'stop') stop_song(message, server_queue);
     }
     
