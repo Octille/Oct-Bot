@@ -1,6 +1,9 @@
 const { Client, Collection } = require("discord.js");
 const config = require('./config.json')
 const fs = require("fs");
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://Octille:Gurkirat1@cluster0.vb6c8.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const client = new Client({
     disableEveryone: true
