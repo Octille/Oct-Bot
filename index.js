@@ -1,6 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const { prefix, config } = require('./config.json');
 const fs = require("fs");
+const db = require("quick.db") 
 
 
 const client = new Client({
@@ -37,6 +38,9 @@ client.on("ready", () => {
 });
 
 client.on("message", async message => {
+
+  let prefix = db.get(`prefix_${message.guild.id}`)
+  if(prefix === null) prefix = default_prefix;
 
 
 
