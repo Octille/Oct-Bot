@@ -27,7 +27,7 @@ module.exports = {
     
     if(args.join("") === default_prefix) {
       db.delete(`prefix_${message.guild.id}`)
-     return await message.channel.send("Reseted Prefix ✅")
+     return await message.channel.send("Reset Prefix ✅")
     }
     
     db.set(`prefix_${message.guild.id}`, args[0])
