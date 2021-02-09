@@ -1,8 +1,7 @@
 const discord = require("discord.js");
 const { stripIndents } = require("common-tags");
 module.exports = {
-    name: "help",
-    aliases: ["h"],
+    name: "h",
     category: "info",
     description: "Returns all commands, or one specific command info",
     usage: "[command | alias]",
