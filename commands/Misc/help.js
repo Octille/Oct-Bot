@@ -9,6 +9,7 @@ module.exports = {
     run: async (client, message, args) => {
         const data = [];
 		const { commands } = message.client;
+        const name = args[0].toLowerCase();
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
         var fff;
