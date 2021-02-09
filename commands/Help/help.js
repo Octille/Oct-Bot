@@ -7,6 +7,7 @@ module.exports = {
     name: 'help',
     description: 'send this message',
     run: async (client, message, args) => {
+        message.channel.send('Type !h "(command name)" for more info')
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
         var fff;
         var hmu = {};
@@ -19,7 +20,7 @@ module.exports = {
                 fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
                     files1.forEach((f2, i2) => {
                         const cmd = f2.replace('.js', '');
-                      hmu[iii].addField(cmd, ' ˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞˞');
+                      hmu[iii].addField(cmd, '_ _');
                     });
                 });
             }  
