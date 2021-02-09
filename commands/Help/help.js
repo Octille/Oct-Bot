@@ -7,7 +7,7 @@ module.exports = {
     name: 'help',
     description: 'send this message',
     run: async (client, message, args) => {
-        const embed = new discord.Embed()
+        const embed = new discord.MessageEmbed()
         .setTitle('Type !h "(command name)" for more info')
         message.channel.send(embed)
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
