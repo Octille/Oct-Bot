@@ -7,6 +7,8 @@ module.exports = {
     name: 'help',
     description: 'send this message',
     run: async (client, message, args) => {
+        const data = [];
+		const { commands } = message.client;
         const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
         var fff;
