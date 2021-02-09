@@ -1,43 +1,47 @@
-const fs = require('fs');
-const pagination = require('discord.js-pagination');
-const discord = require('discord.js');
-const client = new discord.Client(); 
-const config = require('../../config.json');
+const discord = require("discord.js");
+const { stripIndents } = require("common-tags");
 module.exports = {
-    name: 'help',
-    description: 'send this message',
+    name: "help",
+    aliases: ["h"],
+    category: "info",
+    description: "Returns all commands, or one specific command info",
+    usage: "[command | alias]",
     run: async (client, message, args) => {
-        var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
-        var fff;
-        var hmu = {};
-        fs.readdir("./commands", (err2, fff) => {
-            for (i = 0; i < fff.length; i++) {
-                hmu[i] = new discord.MessageEmbed();
-                hmu[i].setTitle(fff[i]);
-                hmu[i].setColor(config.embedColor);
-                const iii = i;
-                fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
-                    files1.forEach((f2, i2) => {
-                        const cmd = f2.replace('.js', '');
-                      hmu[iii].addField(cmd, ' ');
-                    });
-                });
-            }  
-        });
-        await wait(50);
-        var helppage = [];
-        var f = 0;
-        for (let step = 0; f == 0; step++) {
-            if(hmu[helppage.length]) {
-            helppage[helppage.length] = hmu[helppage.length];
-            console.log("+1")
-            } else {
-                f = 1;
-            }
+        if (args[0]) {
+            return getCMD(client, message, args[0]);
+        } else {
+            return getAll(client, message);
         }
-        await wait(50);
-        const emojis = ["◀", "▶"];
-        
-        pagination(message, helppage, emojis)
     }
 }
+function getAll(client, message) {
+    const embed = new discord.MessageEmbed()
+        .setColor("RANDOM")
+    const commands = (category) => {
+        return client.commands
+            .filter(cmd => cmd.category === category)
+            .map(cmd => `- \`${cmd.name}\``)
+            .join("\n");
+        }
+        const info = client.categories
+            .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
+            .reduce((string, category) => string + "\n" + category);
+        return message.channel.send(embed.setDescription(info));
+    }
+    function getCMD(client, message, input) {
+        const embed = new discord.MessageEmbed()
+        const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
+        
+        let info = `No information found for command **${input.toLowerCase()}**`;
+        if (!cmd) {
+            return message.channel.send(embed.setColor("RED").setDescription(info));
+        }
+        if (cmd.name) info = `**Command name**: ${cmd.name}`;
+        if (cmd.aliases) info += `\n**Aliases**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`;
+        if (cmd.description) info += `\n**Description**: ${cmd.description}`;
+        if (cmd.usage) {
+            info += `\n**Usage**: ${cmd.usage}`;
+            embed.setFooter(`Syntax: <> = required, [] = optional`);
+        }
+        return message.channel.send(embed.setColor("GREEN").setDescription(info));
+    }
