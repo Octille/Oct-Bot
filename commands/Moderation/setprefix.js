@@ -1,38 +1,37 @@
-const prefixModel = require("../../models/prefix")
+
+const db = require("quick.db")
+const { default_prefix } = require("../../config.json")
 
 module.exports = {
-    name:'setprefix',
-    description: 'sets a new prefix for your server',
-    run: async (client, message, args) =>{
-    const data = await prefixModel.findOne({
-        GuildID: message.guild.id
-    });
-
-    if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
-
-    if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
-
-    if (data) {
-        await prefixModel.findOneAndRemove({
-            GuildID: message.guild.id
-        })
-        
-        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
-
-        let newData = new prefixModel({
-            Prefix: args[0],
-            GuildID: message.guild.id
-        })
-        newData.save();
-    } else if (!data) {
-        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
-
-        let newData = new prefixModel({
-            Prefix: args[0],
-            GuildID: message.guild.id
-        })
-        newData.save();
+  name: "prefix",
+  category: "moderation",
+  usage: "prefix <new-prefix>",
+  description: "Change the guild prefix",
+  run: async (client, message, args) => {
+    //PERMISSION
+    if(!message.member.hasPermission("ADMINISTRATOR")) {
+      return message.channel.send("You are not allowed or do not have permission to change prefix")
     }
-
-}
+    
+    if(!args[0]) {
+      return message.channel.send("Please give the prefix that you want to set")
+    } 
+    
+    if(args[1]) {
+      return message.channel.send("You can not set prefix a double argument")
+    }
+    
+    if(args[0].length > 3) {
+      return message.channel.send("You can not send prefix more than 3 characters")
+    }
+    
+    if(args.join("") === default_prefix) {
+      db.delete(`prefix_${message.guild.id}`)
+     return await message.channel.send("Reseted Prefix ✅")
+    }
+    
+    db.set(`prefix_${message.guild.id}`, args[0])
+  await message.channel.send(`Seted Bot Prefix to ${args[0]}`)
+    
+  }
 }
