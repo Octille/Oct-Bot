@@ -14,15 +14,11 @@ module.exports = {
                 .setColor("RANDOM")
                 .setDescription(`My Commands\nBot Prefix: \'${prefix}\'`)
                 .addField("Commands:", commands.filter(e => !e.modOnly).filter(e => !e.hiddenCommand).filter(e => !e.notReady).map(command => `**${command.name}** `).join('\n'))
-                .setFooter(`${message.author.tag} | Created by AnikoDev`, message.author.displayAvatarURL({
-                    format: 'png',
-                    dynamic: true,
-                    size: 2048
-                }))
+
 
             return message.channel.send(embed);
         }
 
     },
-    help: 'Sends this message!'
+
 }
