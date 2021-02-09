@@ -7,10 +7,6 @@ module.exports = {
     name: 'help',
     description: 'send this message',
     run: async (client, message, args) => {
-        const data = [];
-		const { commands } = message.client;
-        const name = args[0].toLowerCase();
-        const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
         var fff;
         var hmu = {};
@@ -23,7 +19,7 @@ module.exports = {
                 fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
                     files1.forEach((f2, i2) => {
                         const cmd = f2.replace('.js', '');
-                      hmu[iii].addField(cmd, `${command.description}`);
+                      hmu[iii].addField(cmd, ' ');
                     });
                 });
             }  
