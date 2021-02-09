@@ -18,7 +18,7 @@ function getAll(client, message) {
         .setColor("RANDOM")
     const commands = (category) => {
         return client.commands
-        .SetTitle('Please type a command')
+        .setTitle('Please type a command')
     
         }
         const info = client.categories
