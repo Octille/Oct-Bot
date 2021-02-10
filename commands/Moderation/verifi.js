@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const discord = require("discord.js")
 
 module.exports = {
     name: 'reactionrole',
@@ -11,7 +11,7 @@ module.exports = {
         const yellowTeamEmoji = '✅';
 
  
-        let embed = new Discord.MessageEmbed()
+        const embed = new discord.MessageEmbed()
             .setColor('#e42643')
             .setTitle('Choose a team to play on!')
             .setDescription('To get access the server please react with the :white_check_mark: emoji\n Read the rules befor verifing')
