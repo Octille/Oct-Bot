@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'leave', 's', 'p'],
+    aliases: ['skip', 'leave', 's', 'p', 'pause'],
     cooldown: 0,
     description: 'Advanced music bot',
     run: async (client, message, args, cmd) =>{
@@ -133,6 +133,7 @@ module.exports = {
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'leave') stop_song(message, server_queue);
         else if(cmd === 's') skip_song(message, server_queue);
+        else if (cmd === 'pause') pause_song(message, server_queue);
     }
     
 }
