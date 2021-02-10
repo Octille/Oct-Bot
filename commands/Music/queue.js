@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const discord = require("discord.js");
 const { LOCALE } = require("../../util/OctBotUtil");
 const i18n = require("i18n");
 
@@ -79,7 +79,7 @@ function generateQueueEmbed(message, queue) {
 
     const info = current.map((track) => `${++j} - [${track.title}](${track.url})`).join("\n");
 
-    const embed = new MessageEmbed()
+    const embed = new discord.MessageEmbed()
       .setTitle(i18n.__("queue.embedTitle"))
       .setThumbnail(message.guild.iconURL())
       .setColor("#F8AA2A")
