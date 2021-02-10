@@ -13,7 +13,7 @@ module.exports = {
         fs.readdir("./commands", (err2, fff) => {
             for (i = 0; i < fff.length; i++) {
                 hmu[i] = new discord.MessageEmbed();
-                hmu[i].setTitle('`Type !h "(command name)" for more info\n`' + `_${fff[i]}_`);
+                hmu[i].setTitle('`Type !h "(command name)" for more info\n`' + `___${fff[i]}___`);
                 hmu[i].setColor(config.embedColor);
                 const iii = i;
                 fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
