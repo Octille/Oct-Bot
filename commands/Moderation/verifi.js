@@ -1,11 +1,12 @@
 const discord = require("discord.js")
 
 module.exports = {
-    name: 'reactionrole',
+    name: 'Verifi',
     description: "Sets up a reaction role message!",
     run: async (client, message, args) =>  {
+        message.delete()
         const channel = '786657488304341023';
-        const yellowTeamRole = message.guild.roles.cache.find(role => role.name === "NONS");
+        const yellowTeamRole = message.guild.roles.cache.find(role => role.name === "Nons");
 
  
         const yellowTeamEmoji = '✅';
@@ -13,7 +14,7 @@ module.exports = {
  
         const embed = new discord.MessageEmbed()
             .setColor('#e42643')
-            .setTitle('Choose a team to play on!')
+            .setTitle('Verification!')
             .setDescription('To get access the server please react with the :white_check_mark: emoji\n Read the rules befor verifing')
  
         let messageEmbed = await message.channel.send(embed);
