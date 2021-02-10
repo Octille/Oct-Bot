@@ -4,6 +4,7 @@ module.exports = {
     name: 'reactionrole',
     description: "Sets up a reaction role message!",
     run: async (client, message, args) =>  {
+        message.delete()
         const channel = '786657488304341023';
         const yellowTeamRole = message.guild.roles.cache.find(role => role.name === "Nons");
 
@@ -28,9 +29,6 @@ module.exports = {
             if (reaction.message.channel.id == channel) {
                 if (reaction.emoji.name === yellowTeamEmoji) {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(yellowTeamRole);
-                }
-                if (reaction.emoji.name === blueTeamEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(blueTeamRole);
                 }
             } else {
                 return;
