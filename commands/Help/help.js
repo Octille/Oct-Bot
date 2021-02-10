@@ -14,7 +14,7 @@ module.exports = {
             for (i = 0; i < fff.length; i++) {
                 hmu[i] = new discord.MessageEmbed();
                 hmu[i].setTitle('`Type !h "(command name)" for more info\n`' + `___${fff[i]}___`);
-                hmu[i].setColor(config.embedColor);
+                hmu[i].setColor("RANDOM");
                 const iii = i;
                 fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
                     files1.forEach((f2, i2) => {
@@ -30,7 +30,6 @@ module.exports = {
         for (let step = 0; f == 0; step++) {
             if(hmu[helppage.length]) {
             helppage[helppage.length] = hmu[helppage.length];
-            console.log("+1")
             } else {
                 f = 1;
             }

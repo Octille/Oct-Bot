@@ -1,13 +1,11 @@
-const { Client, Collection } = require("discord.js");
+const { Collection } = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 
 const db = require("quick.db") 
 
 
-const client = new Client({
-    disableEveryone: true
-});
+const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
 client.commands = new Collection();
 client.aliases = new Collection();
