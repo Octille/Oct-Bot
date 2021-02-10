@@ -31,7 +31,7 @@ module.exports = {
     }
     
     db.set(`prefix_${message.guild.id}`, args[0])
-  await message.channel.send(`Seted Bot Prefix to ${args[0]}`)
+  await message.channel.send(`Bots prefix has been set to:${args[0]}`)
     
   }
 }

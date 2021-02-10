@@ -4,7 +4,9 @@ module.exports = {
     name: 'kick',
     description: "This command kicks a member!",
     run: async (client, message, args) =>{
-        if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send('You Need Permistions To Run This Command!')
+        if(!message.member.hasPermission("KICK_MEMBERS")){
+             return message.channel.send('You Need Permistions To Run This Command!')
+        }
 
         const user = message.mentions.users.first() || message.author;
 
@@ -15,12 +17,16 @@ module.exports = {
 
 
         const target = message.mentions.users.first();
-        if(target){
-            const memberTarget = message.guild.members.cache.get(target.id);
-            memberTarget.kick();
-            message.channel.send(embed);
-        }else{
-            message.channel.send(`you didnt @ a member i can kick`);
+        try{
+            if(target){
+                const memberTarget = message.guild.members.cache.get(target.id);
+                memberTarget.kick();
+                message.channel.send(embed);
+            }
+          } catch(err) {
+            message.delete()
+            message.channel.send('You didnt @ a memeber i can kick')
+
+        }
         }
     }
-}
