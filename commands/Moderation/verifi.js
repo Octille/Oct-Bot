@@ -1,7 +1,7 @@
 const discord = require("discord.js")
 
 module.exports = {
-    name: 'Verifi',
+    name: 'reactionrole',
     description: "Sets up a reaction role message!",
     run: async (client, message, args) =>  {
         const channel = '786657488304341023';
