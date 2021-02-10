@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const Discord = require('discord.js');
 
 module.exports = {
     name: 'ping',
@@ -6,8 +6,6 @@ module.exports = {
     run: async (client, message, args) =>{
         const embed = new Discord.MessageEmbed()
         .setDescription(`🏓 | Latency is: **${Date.now() - message.createdTimestamp}ms.**`)
-
-        
         message.channel.send(embed);
     },
 };
