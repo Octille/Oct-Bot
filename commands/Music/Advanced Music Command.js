@@ -133,14 +133,14 @@ module.exports = {
         else if(cmd === 'skip') skip_song(message, server_queue);
         else if(cmd === 'leave') stop_song(message, server_queue);
         else if(cmd === 's') skip_song(message, server_queue);
-        if(args[0] == "pause"){
+        else if(cmd === "pause"){
             if(server_queue.connection.dispatcher.paused) return message.channel.send("Song is already paused!");//Checks if the song is already paused.
             server_queue.connection.dispatcher.pause();//If the song isn't paused this will pause it.
             message.channel.send("Paused the song!");//Sends a message to the channel the command was used in after it pauses.
           }
           
           //Unpause command
-          if(args[0] == "unpause"){
+          else if(cmd === "unpause"){
             if(!server_queue.connection.dispatcher.paused) return message.channel.send("Song isn't paused!");//Checks if the song isn't paused.
             server_queue.connection.dispatcher.resume();//If the song is paused this will unpause it.
             message.channel.send("Unpaused the song!");//Sends a message to the channel the command was used in after it unpauses.

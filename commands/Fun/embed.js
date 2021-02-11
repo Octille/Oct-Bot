@@ -12,7 +12,7 @@ module.exports = {
         const error = new Discord.MessageEmbed() 
         .setColor('RANDOM')
         .setTitle('**❌ERROR INVALID ARGS**')
-        .setDescription('`{prefix}embed, title(one word), color(hex code or basic colors in caps; i.e(YELLOW), description(embed body))`')
+        .setDescription(`${prefix}embed, title(one word), color(hex code or basic colors in caps; i.e(YELLOW), description(embed body))`)
 
         if(!title) return message.channel.send(error) // ! means no, so if there's no title, return and send the error embed
         if(!color) return message.channel.send(error)
