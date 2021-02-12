@@ -1,9 +1,10 @@
-const { Discord, Collection } = require("discord.js");
+const { Discord, Client, Collection } = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
-const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const bot = new Discord.Client({disableEveryone: true});
 
-client.on('guildMemberAdd', member => {
+bot.on('guildMemberAdd', member => {
   member.guild.channels.get('809519949193805845').send(`${member} Welcome to the OCT server! please read #rules to continue `); 
 });
 
