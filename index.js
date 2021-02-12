@@ -43,7 +43,7 @@ client.on("message", async message => {
 
   let prefix = db.get(`prefix_${message.guild.id}`)
   if(prefix === null) prefix = default_prefix;
-  const validPermissions = [
+   const validPermissions = [
     "CREATE_INSTANT_INVITE",
     "KICK_MEMBERS",
     "BAN_MEMBERS",
@@ -77,22 +77,6 @@ client.on("message", async message => {
     "MANAGE_EMOJIS",
   ]
 
-  if(command.permissions.length){
-    let invalidPerms = []
-    for(const perm of command.permissions){
-      if(!validPermissions.includes(perm)){
-        return console.log(`Invalid Permissions ${perm}`);
-      }
-      if(!message.member.hasPermission(perm)){
-        invalidPerms.push(perm);
-      }
-    }
-    if (invalidPerms.length){
-      return message.channel.send(`Missing Permissions: \`${invalidPerms}\``);
-    }
-  }
-
-
 
 
     if (message.author.bot) return;
@@ -109,6 +93,21 @@ client.on("message", async message => {
     
       let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
       if (!command) command = client.commands.get(client.aliases.get(cmd));
+
+      if(command.permissions.length){
+        let invalidPerms = []
+        for(const perm of command.permissions){
+          if(!validPermissions.includes(perm)){
+            return console.log(`Invalid Permissions ${perm}`);
+          }
+          if(!message.member.hasPermission(perm)){
+            invalidPerms.push(perm);
+          }
+        }
+        if (invalidPerms.length){
+          return message.channel.send(`Missing Permissions: \`${invalidPerms}\``);
+        }
+      }
   
       if (command) 
           command.run(client, message, args, cmd);
