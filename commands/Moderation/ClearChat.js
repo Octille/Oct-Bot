@@ -3,7 +3,6 @@ const discord = require("discord.js")
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
-    permissions: ["ADMINISTRATOR"],
     run: async (client, message, args) => {
 
         if (!args[0]) return message.reply("Please enter the amount of messages to clear!");
