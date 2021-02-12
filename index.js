@@ -1,4 +1,4 @@
-const { Discord, Client, Collection } = require("discord.js");
+const { Discord, Collection } = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
