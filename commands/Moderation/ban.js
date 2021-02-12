@@ -57,7 +57,7 @@ module.exports = {
             .setThumbnail(toBan.user.displayAvatarURL)
             .setFooter(message.member.displayName, message.author.displayAvatarURL)
             .setTimestamp()
-            .setDescription(stripIndents`**- baned member:** ${toBan} (${toBan.id})
+            .setDescription(`**- baned member:** ${toBan} (${toBan.id})
             **- baned by:** ${message.member} (${message.member.id})
             **- Reason:** ${args.slice(1).join(" ")}`);
 
