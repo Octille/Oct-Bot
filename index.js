@@ -3,7 +3,7 @@ const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
-bot.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', member => {
   member.guild.channels.get('809519949193805845').send(`${member} Welcome to the OCT server! please read #rules to continue `); 
 });
 
