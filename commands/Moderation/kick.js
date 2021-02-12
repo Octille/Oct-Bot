@@ -11,7 +11,6 @@ module.exports = {
         const user = message.mentions.users.first() || message.author;
         if(!user) return message.channel.send('You need to mention a member!')
         let description = args.slice(1).join(" ") 
-
         if(!description) return message.channel.send('please specify a reason')
 
         const embed = new discord.MessageEmbed()
