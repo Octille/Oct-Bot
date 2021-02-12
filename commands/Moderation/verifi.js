@@ -3,7 +3,7 @@ const discord = require("discord.js")
 module.exports = {
     name: 'reactionrole',
     description: "Sets up a reaction role message!",
-    permissions: ["ADMINISTRATOR"],
+    
     run: async (client, message, args) =>  {
         message.delete()
         const channel = '786657488304341023';
