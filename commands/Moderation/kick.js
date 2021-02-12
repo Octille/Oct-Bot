@@ -3,10 +3,8 @@ const discord = require('discord.js')
 module.exports = {
     name: 'kick',
     description: "This command kicks a member!",
+    permissions: ["ADMINISTRATOR"],
     run: async (client, message, args) =>{
-        if(!message.member.hasPermission("KICK_MEMBERS")){
-             return message.channel.send('You Need Permistions To Run This Command!')
-        }
 
         const user = message.mentions.users.first() || message.author;
 
