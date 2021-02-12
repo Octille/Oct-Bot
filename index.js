@@ -58,24 +58,6 @@ client.on("message", async message => {
     
       let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
       if (!command) command = client.commands.get(client.aliases.get(cmd));
- 
-    
-      if(command.permissions.length){
-        let invalidPerms = []
-        for(const perm of command.permissions){
-          if(!validPermissions.includes(perm)){
-            return console.log(`Invalid Permissions ${perm}`);
-          }
-          if(!message.member.hasPermission(perm)){
-            invalidPerms.push(perm);
-          }
-        }
-        if (invalidPerms.length){
-          return message.channel.send(`Missing Permissions: \`${invalidPerms}\``);
-        }
-      }
-    
-
   
       if (command) 
           command.run(client, message, args, cmd);
