@@ -8,7 +8,7 @@ module.exports = {
              return message.channel.send('You Need Permistions To Run This Command!')
         }
 
-        const user = message.mentions.users.first() || message.author;
+        const user = message.mentions.users.first();
         if(!user) return message.channel.send('You need to mention a member!')
         let description = args.slice(1).join(" ") 
         if(!description) return message.channel.send('please specify a reason')
@@ -18,18 +18,12 @@ module.exports = {
         .setTitle('Member Kicked')
         .setDescription("successfully kicked @" + user.username + "\nReason:" + description)
 
-
-        const target = message.mentions.users.first();
-        try{
-            if(target){
-                const memberTarget = message.guild.members.cache.get(target.id);
+        if(user){
+                const memberTarget = message.guild.members.cache.get(user.id);
                 memberTarget.kick();
                 message.channel.send(embed);
             }
-          } catch(err) {
-            message.delete()
-            message.channel.send('You didnt @ a memeber i can kick')
+          } 
 
         }
-        }
-    }
+        
