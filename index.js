@@ -2,6 +2,21 @@ const { Client, Collection } = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 
+const channelId = '809519949193805845' // welcome channel
+const targetChannelId = '633361079048601639' // rules and info
+
+client.on('guildMemberAdd', (member) => {
+  const message = `Please welcome <@${
+    member.id
+  }> to the server! Please check out ${member.guild.channels.cache
+    .get(targetChannelId)
+    .toString()}`
+
+  const channel = member.guild.channels.cache.get(channelId)
+  channel.send(message)
+})
+
+
 const db = require("quick.db") 
 
 
