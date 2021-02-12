@@ -1,7 +1,8 @@
-const { Discord, Client, Collection } = require("discord.js");
+const Collection = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
-const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const Discord = require('discord.js');
+const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 const Canvas = require('canvas');
 
 const applyText = (canvas, text) => {
