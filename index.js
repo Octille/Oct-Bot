@@ -3,18 +3,9 @@ const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
-const channelId = '809519949193805845' // welcome channel
-const targetChannelId = '633361079048601639' // rules and info
-
-client.on('guildMemberAdd', (member) => {
-  const message = `Please welcome <@${
-    member.id
-  }> to the server! Please check out ${member.guild.channels.cache
-    .get(targetChannelId)
-    .toString()}`
-
-  const channel = member.guild.channels.cache.get(channelId)
-  channel.send(message)
+client.on("guildMemberAdd", member => {
+  const welcomeChannel = member.guild.channels.cache.find(channel => channel.name === 'welcome')
+  welcomeChannel.send (`${member} Welcome to the OCT server! please read #rules to continue `)
 })
 
 
