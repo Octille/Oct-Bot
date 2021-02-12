@@ -1,6 +1,7 @@
 const { Client, Collection } = require("discord.js");
 const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
+const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 
 const channelId = '809519949193805845' // welcome channel
 const targetChannelId = '633361079048601639' // rules and info
@@ -20,7 +21,7 @@ client.on('guildMemberAdd', (member) => {
 const db = require("quick.db") 
 
 
-const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+
 
 client.commands = new Collection();
 client.aliases = new Collection();
