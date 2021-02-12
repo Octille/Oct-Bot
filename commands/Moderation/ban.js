@@ -5,7 +5,6 @@ module.exports = {
     category: "moderation",
     description: "bans the member",
     run: async (client, message, args) => {
-        const logChannel = message.guild.channels.find(c => c.name === "logs") || message.channel;
 
         if (message.deletable) message.delete();
 
@@ -81,7 +80,7 @@ module.exports = {
                         if (err) return message.channel.send(`Well.... the ban didn't work out. Here's the error ${err}`)
                     });
 
-                logChannel.send(embed);
+                message.channel.send(embed);
             } else if (emoji === "❌") {
                 msg.delete();
 
