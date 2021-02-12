@@ -9,11 +9,14 @@ module.exports = {
         }
 
         const user = message.mentions.users.first() || message.author;
+        let description = args.slice(1).join(" ") 
+
+        if(!description) return message.channel.send('please specify a reason')
 
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle('Member Kicked')
-        .setDescription("I have successfully kicked @" + user.username)
+        .setDescription("successfully kicked @" + user.username + "\nReason:" + description)
 
 
         const target = message.mentions.users.first();
