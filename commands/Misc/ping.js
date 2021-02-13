@@ -1,7 +1,7 @@
 module.exports = {
     name: 'ping',
     description: "this is a ping cmd",
-execute(message, args, Discord, client){
+    run: async (client, message, args) => {
              const embed = new Discord.MessageEmbed()
             .setTitle('Bots ping')
             .setColor('RANDOM')
