@@ -27,7 +27,7 @@ module.exports = {
                 
         }
 
-        const toBan = message.mentions.members.first() || message.guild.members.get(args[0]);
+        const toBan = message.mentions.members.first();
 
         // No member found
         if (!toBan) {
