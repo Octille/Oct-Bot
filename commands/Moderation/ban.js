@@ -1,4 +1,5 @@
 const discord = require('discord.js')
+const chooseArr = ["✅", "❌"];
 
 module.exports = {
     name: "ban",
@@ -40,6 +41,7 @@ module.exports = {
                 }
         if (!toBan.bannable) {
             return message.reply("I can't ban that person due to role hierarchy, I suppose.")
+
         }
         
         const embed = new discord.MessageEmbed()
@@ -57,9 +59,10 @@ module.exports = {
             .setDescription(`Do you want to ban ${toBan}?`)
 
         // Send the message
-        await message.channel.send(promptEmbed).then(async msg => {
+        const msg = await message.channel.send(promptEmbed);
+        await message.channel.send(promptEmbed).then(async => {
             // Await the reactions and the reactioncollector
-            const emoji = await promptMessage(msg, message.author, 30, ["✅", "❌"]);
+            const emoji = await promptMessage(msg, message.author, 30, chooseArr);
 
             // Verification stuffs
             if (emoji === "✅") {
