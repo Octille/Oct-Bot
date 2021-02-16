@@ -1,5 +1,5 @@
+const { promptMessage } = require("../../functions");
 const discord = require('discord.js')
-const chooseArr = ["✅", "❌"];
 
 module.exports = {
     name: "ban",
@@ -59,10 +59,9 @@ module.exports = {
             .setDescription(`Do you want to ban ${toBan}?`)
 
         // Send the message
-        const msg = await message.channel.send(promptEmbed);
-        await message.channel.send(promptEmbed).then(async => {
+        await message.channel.send(promptEmbed).then(async msg => {
             // Await the reactions and the reactioncollector
-            const emoji = await promptMessage(msg, message.author, 30, chooseArr);
+            const emoji = await promptMessage(msg, message.author, 30, ["✅", "❌"]);
 
             // Verification stuffs
             if (emoji === "✅") {
@@ -73,7 +72,7 @@ module.exports = {
 
                 message.channel.send(embed);
             } else if (emoji === "❌") {
-                msg.delete()
+                msg.delete
                 message.reply(`ban canceled.`)
             }
         });
