@@ -65,14 +65,14 @@ module.exports = {
 
             // Verification stuffs
             if (emoji === "✅") {
-                memberTarget.ban()
+                toBan.ban()
                     .catch(err => {
                         if (err) return message.channel.send(`Well.... the ban didn't work out. Here's the error ${err}`)
                     });
 
                 message.channel.send(embed);
             } else if (emoji === "❌") {
-                msg.delete
+                message.delete()
                 message.reply(`ban canceled.`)
             }
         });

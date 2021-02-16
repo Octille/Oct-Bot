@@ -17,7 +17,7 @@ module.exports = {
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
         .setTitle('Member Kicked')
-        .setDescription("successfully kicked @" + user.username + "\nReason:" + description)
+        .setDescription(`successfully kicked ${user}`+ "\nReason:" + description)
 
         if(user){
                 const memberTarget = message.guild.members.cache.get(user.id);
