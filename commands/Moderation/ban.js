@@ -7,20 +7,14 @@ module.exports = {
     run: async (client, message, args) => {
 
         if (message.deletable) message.delete();
-
-        // No args
         if (!args[0]) {
             return message.reply("Please provide a person to ban.")
-                
-        }
-
-        // No reason
+         }
         if (!args[1]) {
-            return message.reply("Please provide a reason to ban.")
-                
+            return message.reply("Please provide a reason to ban.")          
         }
 
-        // No author permissions
+        
         if (!message.member.hasPermission("BAN_MEMBERS")) {
             return message.reply("❌ You do not have permissions to ban members. Please contact a staff member")
                 
@@ -43,13 +37,9 @@ module.exports = {
         // Can't ban urself
         if (toBan.id === message.author.id) {
             return message.reply("You can't ban yourself...")
-                
-        }
-
-        // Check if the user's banable
+                }
         if (!toBan.bannable) {
             return message.reply("I can't ban that person due to role hierarchy, I suppose.")
-                
         }
         
         const embed = new discord.MessageEmbed()
@@ -73,19 +63,15 @@ module.exports = {
 
             // Verification stuffs
             if (emoji === "✅") {
-                msg.delete();
-
-                toBan.ban(args.slice(1).join(" "))
+                memberTarget.ban()
                     .catch(err => {
                         if (err) return message.channel.send(`Well.... the ban didn't work out. Here's the error ${err}`)
                     });
 
                 message.channel.send(embed);
             } else if (emoji === "❌") {
-                msg.delete();
-
+                msg.delete()
                 message.reply(`ban canceled.`)
-                    .then(m => m.delete(10000));
             }
         });
     }
