@@ -10,9 +10,9 @@ module.exports = {
 
         const user = message.mentions.users.first();
         if(!user) return message.channel.send('You need to mention a member!')
-        if (!user.kickable) return message.channel.send(`Sorry but i can kick someone with higher roles then me`)
         let description = args.slice(1).join(" ") 
         if(!description) return message.channel.send('please specify a reason')
+        if (!user.kickable) return message.channel.send(`Sorry but i can kick someone with higher roles then me`)
         
         const embed = new discord.MessageEmbed()
         .setColor("RANDOM")
