@@ -12,7 +12,7 @@ module.exports = {
     run: async (client, message, args) => {
         const platforms = ["pc", "xb1", "psn"];
         
-        if (args[0].toLowerCase() === "store") {
+        if (args[0] === "store") {
             const store = await ft.store();
 
             const embed = new Discord.MessageEmbed()
