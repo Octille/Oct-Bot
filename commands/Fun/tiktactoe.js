@@ -3,7 +3,7 @@ const { tictactoe } = require('reconlx')
 module.exports = {
     name : 'tictactoe',
     aliases: ['ttt'],
-    async execute(client, message, args, Discord){
+    run : async(client, message, args) => {
         const member = message.mentions.members.first() 
             if(!member)  return  message.channel.send('Please specify a member')
         

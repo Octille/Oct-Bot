@@ -6,7 +6,7 @@ module.exports = {
     name: 'namehistory',
     aliases: ['nh'],
     notReady: true,
-    async execute(client, message, args, Discord){
+    run: async (client, message, args) => {
 
         const playerUUIDFetch = await fetch(`https://api.mojang.com/users/profiles/minecraft/${args[0]}`);
         const playerUUIDData = await playerUUIDFetch.json();

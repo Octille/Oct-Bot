@@ -5,7 +5,7 @@ module.exports = {
     name: "ban",
     category: "moderation",
     description: "bans the member",
-    async execute(client, message, args, Discord){
+    run: async (client, message, args) => {
 
         if (message.deletable) message.delete();
         if (!args[0]) {

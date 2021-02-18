@@ -5,7 +5,7 @@ module.exports = {
     name: "meme",
     category: "fun",
     description: "Sends an epic meme",
-    async execute(client, message, args, Discord){
+    run: async (client, message, args) => {
         const subReddits = ["dankmeme", "meme", "me_irl"];
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
