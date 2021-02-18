@@ -1,6 +1,6 @@
 const MojangAPI = require('mojang-api');
 const Discord = require("discord.js");
-const hypixelfunctions = require('../../hypixelfunctions');
+const hypixelfunctions = require('../hypixelfunctions.js');
 const sql = require("sqlite");
 sql.open("./db/data.sqlite");
 
