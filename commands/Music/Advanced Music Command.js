@@ -10,7 +10,7 @@ module.exports = {
     aliases: ['skip', 'leave', 's', 'p', 'pause', 'unpause'],
     cooldown: 0,
     description: 'Advanced music bot',
-    run: async (client, message, args, cmd) =>{
+    async execute(client, message, args, Discord){
 
 
         //Checking for the voicechannel and permissions (you can add more permissions if you like).

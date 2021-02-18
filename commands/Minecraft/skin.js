@@ -7,7 +7,7 @@ sql.open("./db/data.sqlite");
 module.exports = {
     name: 'skin',
     description: 'shows skin of player',
-    run: async (client, message, args) =>{
+    async execute(client, message, args, Discord){
     var uuid = hypixelfunctions.validatePlayer(args[0]);
     var date = new Date();
     if (message.mentions.users.first()) {

@@ -1,4 +1,4 @@
 {
-	"default_prefix": "!",
+	"prefix": "!",
 	"mongopath": "mongodb://localhost:27017"
 }

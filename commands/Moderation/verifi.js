@@ -3,7 +3,7 @@ const discord = require("discord.js")
 module.exports = {
     name: 'reactionrole',
     description: "Sets up a reaction role message!",
-    run: async (client, message, args) =>  {
+    async execute(client, message, args, Discord){
         message.delete()
         const channel = '786657488304341023';
         const yellowTeamRole = message.guild.roles.cache.find(role => role.name === "Nons");

@@ -9,7 +9,7 @@ module.exports = {
     aliases: ["ft"],
     description: "Display someone's stats, the current store, and challenges!!",
     usage: "<username | store>",
-    run: async (client, message, args) => {
+    async execute(client, message, args, Discord){
         const platforms = ["pc", "xb1", "psn"];
         
         if (args[0] === "store") {

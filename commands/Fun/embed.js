@@ -4,7 +4,7 @@ module.exports = {
     name: "embed",
     description: "make embed",
 
-    async run(client, message,  args){
+    async execute(client, message, args, Discord){
         if(!message.member.hasPermission('MANNAGE_MESSAGES')) return // if the member does not have permissions to mannage messages, return/stop reading the code.
         let title = args[0] // args[0] is the first word or number after the command name
         let color = args[1] 

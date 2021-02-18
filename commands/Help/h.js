@@ -5,7 +5,7 @@ module.exports = {
     category: "info",
     description: "Returns all commands, or one specific command info",
     usage: "[command | alias]",
-    run: async (client, message, args) => {
+    async execute(client, message, args, Discord){
         if (args[0]) {
             return getCMD(client, message, args[0]);
         } else {
