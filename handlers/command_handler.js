@@ -1,5 +1,6 @@
 module.exports = (client, discord) => {
     const { Collection } = require("discord.js");
+    const fs =require('fs')
     client.commands = new Collection();
     
     //We let the bot read through the 'commands' folder and return an array including all category folders
