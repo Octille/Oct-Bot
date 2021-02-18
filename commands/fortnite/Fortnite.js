@@ -32,7 +32,7 @@ module.exports = {
 
             message.channel.send(embed);
         } else {
-            const lastWord = args[args.length - 1].toLowerCase();
+            const lastWord = args[args.length - 1];
             
             let platform, username; 
 
