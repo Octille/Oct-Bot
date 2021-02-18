@@ -1,5 +1,5 @@
 const { Collection } = require("discord.js");
-bot.commands = new Collection();
+client.commands = new Collection();
 
 //We let the bot read through the 'commands' folder and return an array including all category folders
 const categories = fs.readdirSync('./commands/');
@@ -13,6 +13,6 @@ for (const file of commandFiles) {
   const command = require(`../commands/${category}/${file}`);
   //We grab that command-file and it's values, and we push it into the commands collection
 
-  bot.commands.set(command.name, command);
+client.commands.set(command.name, command);
         }
     }
