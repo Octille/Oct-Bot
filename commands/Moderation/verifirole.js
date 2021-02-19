@@ -1,7 +1,7 @@
 const discord = require("discord.js")
 
 module.exports = {
-    name: 'Verification',
+    name: 'verifirole',
     description: "Sets up a verification message!",
     run: async (client, message, args) =>  {
         message.delete()
