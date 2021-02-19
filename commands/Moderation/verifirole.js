@@ -4,7 +4,6 @@ module.exports = {
     name: 'verifirole',
     description: "Sets up a verification message!",
     run: async (client, message, args) =>  {
-        message.delete()
         const channel = message.channel;
         let GuildRole = args[0]
         if(!GuildRole) return message.channel.send('Please provide a guild role(case sensitive)')
@@ -58,6 +57,7 @@ module.exports = {
                 return;
             }
         });
+        message.delete()
     }
  
 }   
