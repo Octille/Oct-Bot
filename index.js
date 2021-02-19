@@ -3,7 +3,7 @@ const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 
 const db = require("quick.db") 
