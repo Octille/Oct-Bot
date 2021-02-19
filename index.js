@@ -66,10 +66,10 @@ client.on("message", async message => {
 
 });
 
-mongoose.connect('mongodb+srv:Octille:Gurkirat@cluster0.vb6c8.mongodb.net/OctDB?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_SRV, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  userFindAndModify: false
+  useFindAndModify: false
 }).then(() =>{
   console.log('Connected to the database!')
 }).catch((err) =>{
