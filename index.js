@@ -3,6 +3,7 @@ const { default_prefix, config } = require('./config.json');
 const fs = require("fs");
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
+const mongoose = require('mongoose');
 
 
 const db = require("quick.db") 
@@ -65,14 +66,14 @@ client.on("message", async message => {
 
 });
 
-client.on('guildMemberAdd', member => {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-});
-
+mongoose.connect('mongodb+srv:Octille:Gurkirat@cluster0.vb6c8.mongodb.net/OctDB?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  userFindAndModify: false
+}).then(() =>{
+  console.log('Connected to the database!')
+}).catch((err) =>{
+  console.log(err);
+})
 
 client.login(process.env.token);
