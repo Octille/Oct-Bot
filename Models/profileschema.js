@@ -6,6 +6,8 @@ const profileSchema = new mongoose.Schema({
   coins: { type: Number, default: 1000 },
   bank: { type: Number },
 });
+
 const model = mongoose.model("ProfileModels", profileSchema);
 
-module.exports = model
+module.exports = model;
+
