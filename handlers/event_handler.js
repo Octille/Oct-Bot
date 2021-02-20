@@ -1,5 +1,6 @@
 const { dir } = require('console');
 const fs = require('fs');
+const Discord = require('discord.js')
 
 module.exports = (client, discord) =>{
     const load_dir = (dirs) =>{
