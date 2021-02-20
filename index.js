@@ -9,23 +9,31 @@ const mongoose = require('mongoose');
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
-['command_handler', 'event_handler'].forEach(handler =>{
-  require(`./handlers/${handler}`)(client, Discord)
-})
+client.config = config;
+fs.readdir("./events/", (err, files) => {
+    if (err) return console.error(err);
+    files.forEach(file => {
+      const event = require(`./events/${file}`);
+      let eventName = file.split(".")[0];
+      client.on(eventName, event.bind(null, client));
+    });
+  });
 
-const db = require("quick.db") 
+
+fs.readdir("./commands/", (err, files) => {
+  if (err) return console.error(err);
+  files.forEach(file => {
+    if (!file.endsWith(".js")) return;
+    let props = require(`./commands/${file}`);
+    let commandName = file.split(".")[0];
+    console.log(`Loaded ${commandName}`);
+    client.commands.set(commandName, props);
+  });
+});
 
 
 
 
-//client.commands = new Collection();
-//client.aliases = new Collection();
-
-//client.categories = fs.readdirSync("./commands/");
-
-//["command"].forEach(handler => {
-    //require(`./handlers/${handler}`)(client);
-//});
 
 
 
@@ -40,31 +48,6 @@ mongoose.connect('mongodb+srv://Octille:Gurkirat1@discordbot.vb6c8.mongodb.net/O
   .catch((error) => console.error(error));
 
 
-//client.on("message", async message => {
-
-  //let prefix = db.get(`prefix_${message.guild.id}`)
-  //if(prefix === null) prefix = default_prefix;
-
-    //if (message.author.bot) return;
-    //if (!message.guild) return;
-    //if (!message.content.startsWith(prefix)) return;
-    //if (!message.member) message.member = await message.guild.fetchMember(message);
-
-    //const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    //const cmd= args.shift().toLowerCase();
-   
-  
-
-      //if (cmd.length === 0) return;
-    
-     // let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
-     //if (!command) command = client.commands.get(client.aliases.get(cmd));
-  
-     //if (command) 
-         // command.run(client, message, args, cmd);
-
-
-//});
 
 
 client.login(process.env.token);
