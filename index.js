@@ -24,7 +24,7 @@ client.categories = fs.readdirSync("./commands/");
 
 var used1 = false;
 
-client.on("ready", () => {
+client.on("ready", async () => {
     console.log(`Hi, ${client.user.username} is now online!`);
     setInterval(() => {
         if (used1) {
