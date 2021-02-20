@@ -20,11 +20,11 @@ fs.readdir("./events/", (err, files) => {
   });
 
 
-fs.readdir("./commands/", (err, files) => {
+fs.readdir(`./commands/${category}`, (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
+    let props = require(`../commands/${category}/${file}`);
     let commandName = file.split(".")[0];
     console.log(`Loaded ${commandName}`);
     client.commands.set(commandName, props);
