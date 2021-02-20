@@ -9,38 +9,23 @@ const mongoose = require('mongoose');
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
-client.config = config;
-fs.readdir("./events/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-      const event = require(`./events/${file}`);
-      let eventName = file.split(".")[0];
-      client.on(eventName, event.bind(null, client));
-    });
-  });
+['command_handler', 'event_handler'].forEach(handler =>{
+  require(`./handlers/${handler}`)(client, Discord)
+})
 
-
-  const { Collection } = require("discord.js");
-  bot.commands = new Collection();
-  
-  //We let the bot read through the 'commands' folder and return an array including all category folders
-  const categories = fs.readdirSync('./commands/');
-  
-  for (const category of categories) {
-  const commandFiles = fs.readdirSync(`./commands/${category}`).filter(File => File.endsWith('.js'));
-  //We now enter every sub-folder one by one and filter the files to include .js only, readdirSync() returns an array including the items/files in that directory 
-  
-  //We create an intended for loop (notice how the for loops are inside eachother)
-  for (const file of commandFiles) {
-    const command = require(`../commands/${category}/${file}`);
-    //We grab that command-file and it's values, and we push it into the commands collection
-  
-    bot.commands.set(command.name, command);
-          }
-      }
+const db = require("quick.db") 
 
 
 
+
+//client.commands = new Collection();
+//client.aliases = new Collection();
+
+//client.categories = fs.readdirSync("./commands/");
+
+//["command"].forEach(handler => {
+    //require(`./handlers/${handler}`)(client);
+//});
 
 
 
@@ -55,6 +40,31 @@ mongoose.connect('mongodb+srv://Octille:Gurkirat1@discordbot.vb6c8.mongodb.net/O
   .catch((error) => console.error(error));
 
 
+//client.on("message", async message => {
+
+  //let prefix = db.get(`prefix_${message.guild.id}`)
+  //if(prefix === null) prefix = default_prefix;
+
+    //if (message.author.bot) return;
+    //if (!message.guild) return;
+    //if (!message.content.startsWith(prefix)) return;
+    //if (!message.member) message.member = await message.guild.fetchMember(message);
+
+    //const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    //const cmd= args.shift().toLowerCase();
+   
+  
+
+      //if (cmd.length === 0) return;
+    
+     // let command = client.commands.get(cmd) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(cmd));
+     //if (!command) command = client.commands.get(client.aliases.get(cmd));
+  
+     //if (command) 
+         // command.run(client, message, args, cmd);
+
+
+//});
 
 
 client.login(process.env.token);
