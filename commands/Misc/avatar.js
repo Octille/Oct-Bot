@@ -5,7 +5,7 @@ module.exports = {
   name: "avatar",
   description: "get a user's avatar",
   aliases: 'av',
-  run: async (client, message, args) => {
+  async execute(client, message, args) {
     const user = message.mentions.users.first() || message.author;
 
     const embed = new Discord.MessageEmbed()

@@ -3,7 +3,7 @@ const discord = require("discord.js")
 module.exports = {
     name: 'clear',
     description: "Clear messages!",
-    run: async (client, message, args) => {
+    async execute(client, message, args) {
         if(!message.member.hasPermission("MANAGE_MESSAGES")){
             return message.channel.send('You Need Permistions To Run This Command!')
        }

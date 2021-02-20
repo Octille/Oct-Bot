@@ -13,7 +13,7 @@ const { isNullOrUndefined } = require('util');
 module.exports = {
     name: 'skyblock',
     aliases: ['sb'],
-    run: async (client, message, args) => {
+    async execute(client, message, args) {
 
         let expMessage = 'Keep in mind this is experimental!\nThere are many bugs in this command!\nIf you get an error message then please type command properly';
 

@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 module.exports = {
     name: 'ping',
     description: "this is a ping cmd",
-    run: async (client, message, args) => {
+    async execute(client, message, args) {
              const embed = new Discord.MessageEmbed()
             .setTitle('Bots ping')
             .setColor('RANDOM')
