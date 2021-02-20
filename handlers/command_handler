@@ -1,29 +1,24 @@
-const fs = require("fs");
-
-module.exports = (client, Discord) =>{
-    const load = (dir = "./commands/") => {
-
-        readdirSync(dir).forEach(dirs => {
-            const commands = readdirSync(`${dir}${sep}${dirs}${sep}`).filter(files => files.endsWith(".js"));
-            for (const file of commands) {
-                const pull = require(`${dir}/${dirs}/${file}`);
-                if (pull.help && typeof (pull.help.name) === "string" && typeof (pull.help.category) === "string") {
-                    if (bot.commands.get(pull.help.name)) return console.warn(`${warning} Two or more commands have the same name ${pull.help.name}.`);
-                    bot.commands.set(pull.help.name, pull);
-                    console.log(`${success} Loaded command ${pull.help.name}.`);
-                }
-                else {
-                    console.log(`${error} Error loading command in ${dir}${dirs}. you have a missing help.name or help.name is not a string. or you have a missing help.category or help.category is not a string`);
-                    continue;
-                }
-                if (pull.help.aliases && typeof (pull.help.aliases) === "object") {
-                    pull.help.aliases.forEach(alias => {     
-                        if (bot.aliases.get(alias)) return console.warn(`${warning} Two commands or more commands have the same aliases ${alias}`);
-                        bot.aliases.set(alias, pull.help.name);
-                    });
-                }
+const { readdirSync } = require("fs");
+const ascii = require("ascii-table");
+let table = new ascii("Commands");
+table.setHeading("Command", "Load status");
+module.exports = (client) => {
+    readdirSync("./commands/").forEach(dir => {
+        const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
+    
+        for (let file of commands) {
+            let pull = require(`../commands/${dir}/${file}`);
+            if (pull.name) {
+                client.commands.set(pull.name, pull);
+                table.addRow(file, '✅');
+            } else {
+                table.addRow(file, `❌  -> missing a help.name, or help.name is not a string.`);
+                continue;
             }
     
-        });
-    };
+            if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
+        }
+    });
+    
+    console.log(table.toString());
 }
