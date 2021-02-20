@@ -40,6 +40,15 @@ client.on("ready", () => {
           used1 = true;
         }
       }, 3000);
+      mongoose.connect(MONGODB_SRV, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+      }).then(() =>{
+        console.log('Connected to the database!')
+      }).catch((err) =>{
+        console.log(err);
+      })
 });
 
 client.on("message", async message => {
