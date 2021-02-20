@@ -40,7 +40,7 @@ client.on("ready", () => {
           used1 = true;
         }
       }, 3000);
-      mongoose.connect(MONGODB_SRV, {
+      await mongoose.connect(MONGODB_SRV, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false
