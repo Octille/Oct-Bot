@@ -1,7 +1,7 @@
 module.exports = {
     name: 'tempmute',
     description: 'tempmutes a member',
-    async execute(client, message, args) {
+    async execute(message,args, cmd, client, Discord){
         if(message.member.hasPermission('MANAGE_MESSAGES')) {
             var member = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]));
             if(!member) return message.reply('Please Provide a Member to TempMute.')

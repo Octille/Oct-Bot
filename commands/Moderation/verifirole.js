@@ -3,7 +3,7 @@ const discord = require("discord.js")
 module.exports = {
     name: 'verifirole',
     description: "Sets up a verification message!",
-    async execute(client, message, args) {
+    async execute(message,args, cmd, client, Discord){
         const channel = message.channel;
         let GuildRole = args[0]
         if(!GuildRole) return message.channel.send('Please provide a guild role(case sensitive)')

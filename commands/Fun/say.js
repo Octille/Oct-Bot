@@ -3,7 +3,7 @@ module.exports = {
     description: "says something",
 
     
-    async execute(client, message, args){  
+    async execute(message,args, cmd, client, Discord){  
         if (message.content.includes("@everyone") || (message.content.includes("@here"))) return // if the message content includes @everyone OR ( || means or in js) @here, stop running the code. 
  
         if(!message.member.permissions.has('MANAGE_MESSAGES')) return // if the user running the command doesn't have permissions to mannage messages, stop running the code. ! means no or doesn't in js.

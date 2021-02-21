@@ -2,7 +2,7 @@
 	name: 'reload',
 	description: 'Reloads a command',
 	args: true,
-	async execute(client, message, args) {
+	async execute(message,args, cmd, client, Discord){
 		const commandName = args[0].toLowerCase();
 		const command = message.client.commands.get(commandName)
 			|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

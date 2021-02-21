@@ -5,7 +5,7 @@ const Discord = require('discord.js')
 module.exports = {
     name: 'mcserver',
     description: 'get information about a minecraft server',
-    async execute(client, message, args){
+    async execute(message,args, cmd, client, Discord){
         if(!args[0]) return message.channel.send('Please enter a minecraft server ip');
         if(!args[1]) return message.channel.send('Please enter a minecraft server port');
  

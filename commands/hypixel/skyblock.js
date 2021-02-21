@@ -13,7 +13,7 @@ const { isNullOrUndefined } = require('util');
 module.exports = {
     name: 'skyblock',
     aliases: ['sb'],
-    async execute(client, message, args) {
+    async execute(message,args, cmd, client, Discord){
 
         let expMessage = 'Keep in mind this is experimental!\nThere are many bugs in this command!\nIf you get an error message then please type command properly';
 

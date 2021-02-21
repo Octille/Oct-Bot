@@ -6,7 +6,7 @@ const config = require('../../config.json');
 module.exports = {
     name: 'help',
     description: 'send this message',
-    async execute(client, message, args) {
+    async execute(message,args, cmd, client, Discord) {
         var wait = ms => new Promise((r, j)=>setTimeout(r, ms))
         var fff;
         var hmu = {};

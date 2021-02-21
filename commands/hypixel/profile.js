@@ -4,7 +4,7 @@ const colors = require('../../colors.json');
 module.exports = {
     name: 'player',
     aliases: ['profile'],
-    async execute(client, message, args) {
+    async execute(message,args, cmd, client, Discord){
 
         if (!args.length) return message.reply('Please provide a valid playername as a parameter.');
 
