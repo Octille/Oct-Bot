@@ -3,7 +3,7 @@ module.exports = {
     name: 'daily',
     cooldown: 60 * 60 * 24,
     async execute(message, args, cmd, client, discord, profileData) {
-        const daily = 250
+        const daily = 75000
         const response = await profileModel.findOneAndUpdate(
             {
               userID: message.author.id,
