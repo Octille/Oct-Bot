@@ -17,6 +17,7 @@
     "commando-provider-mongo": "^2.0.2",
     "common-tags": "^1.8.0",
     "cross-fetch": "^3.0.6",
+    "discord-embed-maker": "^3.0.8",
     "discord-prefix": "^2.0.0",
     "discord-xp": "^1.1.7",
     "discord.js": "^12.5.1",

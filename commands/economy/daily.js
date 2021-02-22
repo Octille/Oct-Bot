@@ -14,7 +14,7 @@ module.exports = {
                 },
               }
             );
-            return message.channel.send(`$${daily} were placed in your wallet`)
+            return message.channel.send(`**₪ ${daily}** were placed in your wallet`)
 
     }
 }

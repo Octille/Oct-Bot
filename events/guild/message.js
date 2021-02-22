@@ -2,6 +2,11 @@ const profileModel = require("../../models/profileSchema");
 const cooldowns = new Map();
 
 module.exports = async(Discord, client, message) => {
+  const messages = ["Hello!", "Hey!", "Hi!", "Goodday!"]
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  if (message.content == "hello") {
+    message.channel.send(randomMessage);
+  }
     const prefix = '!';
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     let profileData;
@@ -46,4 +51,5 @@ module.exports = async(Discord, client, message) => {
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 
     if(command) command.execute(message, args, cmd, client, Discord, profileData);
+   
 }

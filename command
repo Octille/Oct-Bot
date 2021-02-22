@@ -2,7 +2,7 @@ module.exports = {
     name: '',
     description: '',
     aliases: [" "],
-    execute(message, args, cmd, client, Discord, profileData) {
+    async execute(message, args, cmd, client, Discord, profileData) {
 
     }
 

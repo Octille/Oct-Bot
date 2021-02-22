@@ -6,11 +6,11 @@ module.exports = {
       try {
         const Balance = new Discord.MessageEmbed()
         .setTitle('Bank')
-        .setDescription(`Wallet: $${profileData.coins}\n Bank: $${profileData.bank}`)
+        .setDescription(`Wallet: **₪ ${profileData.coins}**\n Bank: **₪ ${profileData.bank}**`)
         
           message.channel.send(Balance);
         } catch (err){
-          message.channel.send('Bank created you get $1000 coins to start, to view you bank type "!bal"')
+          message.channel.send('Bank created you get **₪ 1000** coins to start, to view you bank type "!bal"')
         }
       
     },
