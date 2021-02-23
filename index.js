@@ -4,6 +4,7 @@ const fs = require("fs");
 const Discord = require('discord.js');
 const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION" ]});
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 
 client.commands = new Discord.Collection();
@@ -13,7 +14,7 @@ client.events = new Discord.Collection();
   require(`./handlers/${handler}`)(client, Discord)
 })
 
-mongoose.connect('mongodb+srv://Octille:Gurkirat1@discordbot.vb6c8.mongodb.net/OctDb?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_SRV, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -22,4 +23,5 @@ mongoose.connect('mongodb+srv://Octille:Gurkirat1@discordbot.vb6c8.mongodb.net/O
   .catch((error) => console.error(error));
 
 
-client.login(process.env.token);
+//client.login(process.env.token);
+client.login('NzQxNzc2NDczNjEzOTI2NDkw.Xy8fLA.j-TZvjyhOdWKl_2vZxl7EksbZ6M')
