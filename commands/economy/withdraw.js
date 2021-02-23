@@ -21,7 +21,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully withdrew **₪ ${all}**, your bank is now **₪ ${profileData.coins}**`)
+                return message.channel.send(`Succesfully withdrew **₪ ${all.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**, your bank is now **₪ ${profileData.coins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
         }
         if (isNaN(amount)) {
             return message.channel.send('please provide a valid amount')
@@ -40,7 +40,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully withdrew ₪${amount}, your bank is now ₪${profileData.coins}`)
+                return message.channel.send(`Succesfully withdrew ₪${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}, your bank is now ₪${profileData.coins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`)
 
 
     }

@@ -2,6 +2,7 @@ const chooseArr = ["2", "1",];
 const profileModel = require("../../models/profileSchema");
 module.exports = {
   name: "beg",
+  cooldown: 60,
   description: "beg for coins",
   async execute(message, args, cmd, client, discord, profileData) {
     const botChoice = chooseArr[Math.floor(Math.random() * chooseArr.length)];

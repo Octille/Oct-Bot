@@ -6,7 +6,7 @@ module.exports = {
       try {
         const Balance = new Discord.MessageEmbed()
         .setTitle('Bank')
-        .setDescription(`Wallet: **₪ ${profileData.coins}**\n Bank: **₪ ${profileData.bank}**`)
+        .setDescription(`Wallet: **₪ ${profileData.coins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**\n Bank: **₪ ${profileData.bank.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
         
           message.channel.send(Balance);
         } catch (err){

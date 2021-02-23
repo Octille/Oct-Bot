@@ -4,7 +4,12 @@ module.exports = {
     description: 'deposts all your money',
     aliases: ["dep"],
     async execute(message, args, cmd, client, Discord, profileData) {
-        const amount = args[0];
+      const bank = profileData.bank
+      const coins = profileData.coins
+      const alltotal = bank+coins
+        const amount = args[0]
+        const banktotal = args[0]+bank
+        
         if(args[0] == "all"){
             const all = profileData.coins
             if(all < 1){
@@ -21,7 +26,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully deposit **₪ ${all}** to your bank, you now have **₪ ${profileData.bank}** in your bank`)
+                return message.channel.send(`Succesfully deposit **₪ ${all.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** to your bank, you now have **₪ $${alltotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** in your bank`)
         }
         if (isNaN(amount)) {
             return message.channel.send('please provide a valid amount')
@@ -40,7 +45,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully deposit **₪ ${amount}** to your bank, you now have **₪ ${profileData.bank}** in your bank`)
+                return message.channel.send(`Succesfully deposit **₪ ${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** to your bank, you now have **₪ ${banktotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** in your bank`)
 
 
     }
