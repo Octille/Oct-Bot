@@ -4,9 +4,13 @@ module.exports = {
     description: 'withdraws your coins',
     aliases: ["with"],
     async execute(message, args, cmd, client, Discord, profileData) {
+      const bank = profileData.bank
+      const coins = profileData.coins
+      const alltotal = bank+coins
         const amount = args[0];
         if(args[0] == "all"){
             const all = profileData.bank
+            const allbalance = all+coins
             if(all < 1){
                 return message.channel.send('you can\'t withdraw any coins you have 0 in your bank')
             }
@@ -21,7 +25,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully withdrew **₪ ${all.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**, your bank is now **₪ ${profileData.coins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
+                return message.channel.send(`Succesfully withdrew **₪ ${profileData.bank.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**, your balance is now **₪ ${allbalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
         }
         if (isNaN(amount)) {
             return message.channel.send('please provide a valid amount')
@@ -40,7 +44,8 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully withdrew ₪${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}, your bank is now ₪${profileData.coins.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`)
+                const bankamount = bank-amount
+                return message.channel.send(`Succesfully withdrew **₪${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**, your bank now has **₪${bankamount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** coins`)
 
 
     }

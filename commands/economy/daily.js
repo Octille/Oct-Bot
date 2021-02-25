@@ -3,7 +3,7 @@ module.exports = {
     name: 'daily',
     cooldown: 60 * 60 * 24,
     async execute(message, args, cmd, client, discord, profileData) {
-        const daily = 75000
+        const daily = 7500
         const response = await profileModel.findOneAndUpdate(
             {
               userID: message.author.id,
@@ -14,7 +14,7 @@ module.exports = {
                 },
               }
             );
-            return message.channel.send(`**₪ ${daily}** were placed in your wallet`)
+            return message.channel.send(`**₪ ${daily.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** were placed in your wallet`)
 
     }
 }

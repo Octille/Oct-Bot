@@ -12,9 +12,49 @@ const applyText = (canvas, text) => {
 	return ctx.font;
 };
 const Discord = require('discord.js');
+const Guild = require('../../models/guild')
 
 module.exports = async (client, discord, member,) => {
-    const channel = member.guild.channels.cache.find(ch => ch.name === '👋welcome');
+	try{
+		let profile = await profileModel.findOne({
+
+		})
+
+	} catch(err){
+		let profile = await profileModel.create({
+			userID: member.id,
+			serverID: member.guild.id,
+			coins: 1000,
+			bank: 0,
+			miners: 0,
+		  });
+		  profile.save();
+	}
+	
+	const settings = await Guild.findOne({
+
+	}, (err, guild) => {
+		if (err) console.error(err)
+		if (!guild) {
+			const newGuild = new Guild({
+				_id: mongoose.Types.ObjectId(),
+				guildID: message.guild.id,
+				guildName: message.guild.name,
+				prefix: process.env.PREFIX,
+				welcomeID: 0
+	
+			})
+	
+			newGuild.save()
+			.then(result => console.log(result))
+			.catch(err => console.error(err));
+		}
+	});
+
+	
+	const Welcome = settings.welcomeID
+	if(Welcome < 0) return;
+    const channel = member.guild.channels.cache.get(`${Welcome}`);
 	if (!channel) return;
 
 	const canvas = Canvas.createCanvas(700, 250);
@@ -49,13 +89,6 @@ module.exports = async (client, discord, member,) => {
 
 
 
-  let profile = await profileModel.create({
-    userID: member.id,
-    serverID: member.guild.id,
-    coins: 1000,
-    bank: 0,
-	miners: 0,
-  });
-  profile.save();
+ 
 };
 

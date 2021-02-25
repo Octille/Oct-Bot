@@ -28,7 +28,9 @@ module.exports = {
         
 
             try{
-                message.channel.send(embed)
+                message.channel.send(embed).then(msg => {
+                    msg.delete({ timeout: 10000 })
+                  })
             }catch{
                 message.channel.send("ERROR.")
             }

@@ -16,7 +16,7 @@ module.exports = {
               },
             }
           );
-          return message.channel.send(`**${message.author.username}** has ran their miners and gotten** ₪ ${recieved}**`)
+          return message.channel.send(`**${message.author.username}** has ran their miners and gotten** ₪ ${recieved.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
 
 }
 }

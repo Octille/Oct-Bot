@@ -1,13 +1,42 @@
 const profileModel = require("../../models/profileSchema");
 const cooldowns = new Map();
+const Guild = require('../../models/guild');
+const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
-  const messages = ["Hello!", "Hey!", "Hi!", "Goodday!"]
+  const messages = ["Hello", "Hey", "Hi", "Goodday"]
+
   const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-  if (message.content == "hello") {
-    message.channel.send(randomMessage);
-  }
-    const prefix = '!';
+  if(message.content.includes('hello')) {
+    message.reply(randomMessage);
+} 
+if(message.content.includes('bye')) {
+  message.reply('Sorry to see you go D:');
+} 
+  const settings = await Guild.findOne({
+    guildID: message.guild.id
+}, (err, guild) => {
+    if (err) console.error(err)
+    if (!guild) {
+        const newGuild = new Guild({
+            _id: mongoose.Types.ObjectId(),
+            guildID: message.guild.id,
+            guildName: message.guild.name,
+            prefix: process.env.PREFIX,
+            welcomeID: 0
+
+        })
+
+        newGuild.save()
+        .then(result => console.log(result))
+        .catch(err => console.error(err));
+
+        return message.channel.send('This server was not in our database! We have now added and you should be able to use bot commands.').then(m => m.delete({timeout: 10000}));
+    }
+});
+
+
+    const prefix = settings.prefix
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     let profileData;
   try {
@@ -31,7 +60,7 @@ module.exports = async(Discord, client, message) => {
 
     const command = client.commands.get(cmd) || client.commands.find(a => a.aliases && a.aliases.includes(cmd));
 
-    if(!cooldowns.has(command.name)){
+    try {if(!cooldowns.has(command.name)){
         cooldowns.set(command.name, new Discord.Collection());
     }
     const current_time = Date.now();
@@ -42,14 +71,20 @@ module.exports = async(Discord, client, message) => {
         const expiration_time = time_stamps.get(message.author.id) + cooldown_amount;
 
         if(current_time < expiration_time){
-            const time_left = (expiration_time - current_time) / 1000;
+            const time_left = (expiration_time - current_time) / 1000 ;
 
-            return message.reply(`Please wait \`${time_left.toFixed(1)}\` more seconds before using ${command.name}`);
+            return message.reply(`Please wait \`${time_left.toFixed(1)}\` more sec before using ${command.name}`);
         }
     }
+  
     time_stamps.set(message.author.id, current_time);
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
+  } catch (err) {
+    return message.channel.send('there was no command found please refer to !help')}
+ 
+
 
     if(command) command.execute(message, args, cmd, client, Discord, profileData);
+ 
    
 }

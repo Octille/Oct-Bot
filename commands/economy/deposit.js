@@ -8,7 +8,7 @@ module.exports = {
       const coins = profileData.coins
       const alltotal = bank+coins
         const amount = args[0]
-        const banktotal = args[0]+bank
+        const banktotal = bank+amount
         
         if(args[0] == "all"){
             const all = profileData.coins
@@ -45,7 +45,7 @@ module.exports = {
                     },
                   }
                 );
-                return message.channel.send(`Succesfully deposit **₪ ${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** to your bank, you now have **₪ ${banktotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** in your bank`)
+                return message.channel.send(`Succesfully deposit **₪ ${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** to your bank`)
 
 
     }

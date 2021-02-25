@@ -6,6 +6,7 @@ const profileSchema = new mongoose.Schema({
   coins: { type: Number, default: 1000 },
   bank: { type: Number },
   miners: { type: Number },
+  
 });
 
 const model = mongoose.model("ProfileModels", profileSchema);
