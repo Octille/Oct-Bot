@@ -1,3 +1,3 @@
 module.exports = {
-    name: 'leave'
+    name: 'leave1'
 }
