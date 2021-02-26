@@ -4,6 +4,7 @@ module.exports = {
 
     
     async execute(message,args, cmd, client, Discord){  
+        message.delete();
         let say = args.slice(0).join(" ")
         if (message.content.includes("@everyone") || (message.content.includes("@here"))) return // if the message content includes @everyone OR ( || means or in js) @here, stop running the code. 
  

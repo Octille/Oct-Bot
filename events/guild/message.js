@@ -4,12 +4,16 @@ const Guild = require('../../models/guild');
 const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
+  if(message.author.id == ""){
+    return message.channel.send('sorry but it looks like you were temporarily banned from using OCT')
+  }
   const messages = ["Hello", "Hey", "Hi", "Goodday"]
 
   const randomMessage = messages[Math.floor(Math.random() * messages.length)];
   if(message.content.includes('hello')) {
     message.reply(randomMessage);
-} 
+  }
+
 if(message.content.includes('bye')) {
   message.reply('Sorry to see you go D:');
 } 
@@ -54,6 +58,37 @@ if(message.content.includes('bye')) {
   } catch (err) {
     console.log(err);
   }
+  if(profileData.coins < 0){
+    message.channel.send('looks like you lost all your coins and has a stroke, you paid the hostpital half your bank')
+    const bank = profileData.bank
+     
+    let half = bank * 0.5;
+    if(bank < 2){
+      half = 0;
+    }
+    await profileModel.findOneAndUpdate(
+      {
+        userID: message.author.id,
+      },
+      {
+        $inc: {
+        bank: -half,
+      },
+    },
+    );
+    await profileModel.findOneAndUpdate(
+      {
+        userID: message.author.id,
+      },
+      {
+          $set: {
+            coins: 0,
+          },
+        },
+      
+      );
+      return;
+  }
     
     const args = message.content.slice(prefix.length).split(/ +/);
     const cmd = args.shift().toLowerCase();
@@ -85,6 +120,8 @@ if(message.content.includes('bye')) {
 
 
     if(command) command.execute(message, args, cmd, client, Discord, profileData);
+
+    
  
    
 }
