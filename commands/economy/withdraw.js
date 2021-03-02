@@ -27,12 +27,15 @@ module.exports = {
                 );
                 return message.channel.send(`Succesfully withdrew **₪ ${profileData.bank.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**, your balance is now **₪ ${allbalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
         }
+        
         if (isNaN(amount)) {
             return message.channel.send('please provide a valid amount')
              }
+             if (amount % 1 != 0 || amount <= 0) return message.channel.send("Withdrawn amount must be a whole number");
              if(amount> profileData.bank){
                 return message.channel.send('You dont have that many coins in your bank!');
             }
+            
              await profileModel.findOneAndUpdate(
                 {
                   userID: message.author.id,

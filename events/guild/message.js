@@ -27,7 +27,6 @@ if(message.content.includes('bye')) {
             guildID: message.guild.id,
             guildName: message.guild.name,
             prefix: process.env.PREFIX,
-            welcomeID: 0
 
         })
 
@@ -40,7 +39,7 @@ if(message.content.includes('bye')) {
 });
 
 
-    const prefix = settings.prefix
+    const prefix = settings.prefix;
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     let profileData;
   try {
@@ -51,7 +50,17 @@ if(message.content.includes('bye')) {
         serverID: message.guild.id,
         coins: 1000,
         bank: 0,
-        miners: 0,
+        Company: {
+           miners: 0,
+           workers: 0 
+          },
+          Items: {
+          placeholder: 0,
+        }
+    
+          
+          
+        
       });
       profile.save();
     }

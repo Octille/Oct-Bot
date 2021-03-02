@@ -3,6 +3,7 @@ const profileModel = require("../../models/profileSchema");
 module.exports = {
   name: "beg",
   description: "beg for coins",
+  cooldown: 60,
   
   async execute(message, args, cmd, client, discord, profileData) {
     var d = Math.random();

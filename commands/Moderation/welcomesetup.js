@@ -30,10 +30,25 @@ module.exports = {
             }
         });
         const idchannel = message.channel.id
+        const welcomeID = settings.welcomeID
+        if(welcomeID == `${idchannel}`){
+            return message.channel.send('You already set up a welcome message on this channel')
+        }
         await settings.updateOne({
             welcomeID: idchannel
         });
-        return message.channel.send(`your server welcome message has been setup id \`"#${idchannel}"\``)
+        
+        let description = args.slice(1).join(" ")
+        if(!description){
+            description = "Welcome to the server, {member}!"
+        } 
+        const embed = new Discord.MessageEmbed()
+        .setTitle("Welcome message")
+        .setDescription(`id:\`#${idchannel}\``)
+        return message.channel.send(embed);
+        
+       
+
     }
 
 }

@@ -32,6 +32,7 @@ module.exports = async (client, discord, member,) => {
 	}
 	
 	const settings = await Guild.findOne({
+		guildID: member.guild.id
 
 	}, (err, guild) => {
 		if (err) console.error(err)
@@ -41,8 +42,6 @@ module.exports = async (client, discord, member,) => {
 				guildID: message.guild.id,
 				guildName: message.guild.name,
 				prefix: process.env.PREFIX,
-				welcomeID: 0
-	
 			})
 	
 			newGuild.save()
@@ -84,7 +83,7 @@ module.exports = async (client, discord, member,) => {
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	channel.send(`Welcome to the server, ${member}!`, attachment);
+	channel.send(attachment);
 
 
 

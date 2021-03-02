@@ -4,8 +4,9 @@ module.exports = {
     description: 'mines some coins',
     cooldown: 60 * 30,
     async execute(message, args, cmd, client, Discord, profileData) {
-        if(!profileData.miners) return message.channel.send('looks like you dont have a minner go to the shop and buy one!')
-        const recieved = profileData.miners * 25000
+        if(!profileData.Company.miners) return message.channel.send('looks like you dont have a miner go to the shop and buy one!')
+      const k = Math.floor(Math.random() * 5000) + 20000   
+        const recieved = profileData.Company.miners * k
         await profileModel.findOneAndUpdate(
             {
               userID: message.author.id,

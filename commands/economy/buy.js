@@ -1,10 +1,46 @@
+const profileModel = require("../../models/profileSchema");
 module.exports = {
     name: 'buy',
     description: '',
     aliases: [" "],
     async execute(message, args, cmd, client, Discord, profileData) {
-        message.channel.send('in the works of making a buy command please wait')
+        if(!args[0]){
+            return message.channel.send(`please provide something to buy`)
+        }
+try{
+        if(args[0] == "cookie"){
+          const amountedit = args[1]
+                let amount = 1;
+                if(amountedit){
+                  amount = args[1];
+                }
+                const cookiesscosts = 25 * amount
+                if(isNaN(amount)){
+                    return message.channel.send('please provide valid amount')
+                }
+                if(cookiesscosts > profileData.coins){
+                    return message.channel.send('You dont have enough to buy that');
+                }
+                
+      
+                await profileModel.findOneAndUpdate(
+                    {
+                      userID: message.author.id,
+                    },
+                    {
+                      $inc:{
+                        coins: -cookiesscosts,
+                        "Items.Cookies": amount,
+                      },
+                    }
+                  );
+                return message.channel.send(`successfully bought **${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** cookie for **₪ ${cookiesscosts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
+      
+            }
+          } catch (err) {
+            message.channel.send(`that item does not exist`)
+          }
 
+        }
     }
 
-}

@@ -4,6 +4,7 @@ module.exports = {
     aliases: ["bal", "bl"],
     description: "Check the user balance",
     async execute(message, args, cmd, client, Discord,) {
+      try {
       const user = message.mentions.users.first() || message.author;
 
       let profileData;
@@ -15,7 +16,7 @@ module.exports = {
       const coins = profileData.coins;
       const bank = profileData.bank;
       const total = coins+bank;
-      try {
+      
         const Balance = new Discord.MessageEmbed()
         .setColor("RANDOM")
         .setAuthor(`${user.username}'s balance`, user.displayAvatarURL({ dynamic: true }))

@@ -32,6 +32,7 @@ module.exports = {
         if (isNaN(amount)) {
             return message.channel.send('please provide a valid amount')
              }
+             if (amount % 1 != 0 || amount <= 0) return message.channel.send("deposit amount must be a whole number");
              if(amount> profileData.coins){
                 return message.channel.send('You dont have that many coins in your wallet!');
             }
