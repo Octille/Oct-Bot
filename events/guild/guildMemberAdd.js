@@ -13,81 +13,83 @@ const applyText = (canvas, text) => {
 };
 const Discord = require('discord.js');
 const Guild = require('../../models/guild')
-
-module.exports = async (client, discord, member,) => {
-	try{
-		let profile = await profileModel.findOne({
-
-		})
-
-	} catch(err){
-		let profile = await profileModel.create({
-			userID: member.id,
-			serverID: member.guild.id,
+const { MessageAttachment } = require('discord.js')
+module.exports = async (client, discord, member) => {
+	try {
+		const profileData = await profileModel.findOne({ userID: member.id, });
+		if (!profileData) {
+		  const profile = await profileModel.create({
+			userID: message.author.id,
+			serverID: message.guild.id,
 			coins: 1000,
 			bank: 0,
-			miners: 0,
+			Company: {
+			   miners: 0,
+			   workers: 0 
+			  },
+			  Items: {
+			  placeholder: 0,
+			  }
 		  });
 		  profile.save();
-	}
-	
+		}
+	  } catch (err) {
+		console.log(err);
+	  }
+	  
 	const settings = await Guild.findOne({
 		guildID: member.guild.id
+	})
+	if(!settings) return;
 
-	}, (err, guild) => {
-		if (err) console.error(err)
-		if (!guild) {
-			const newGuild = new Guild({
-				_id: mongoose.Types.ObjectId(),
-				guildID: message.guild.id,
-				guildName: message.guild.name,
-				prefix: process.env.PREFIX,
-			})
-	
-			newGuild.save()
-			.then(result => console.log(result))
-			.catch(err => console.error(err));
-		}
-	});
 
-	
-	const Welcome = settings.welcomeID
-	if(Welcome < 0) return;
-    const channel = member.guild.channels.cache.get(`${Welcome}`);
-	if (!channel) return;
 
-	const canvas = Canvas.createCanvas(700, 250);
-	const ctx = canvas.getContext('2d');
 
-	const background = await Canvas.loadImage(path.join(__dirname, '../../wallpaper.jpg'));
-	ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-	ctx.strokeStyle = '#74037b';
-	ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-	ctx.font = '28px sans-serif';
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText('Welcome to the server,', canvas.width / 2.5, canvas.height / 3.5);
 
-	ctx.font = applyText(canvas, `${member.displayName}!`);
-	ctx.fillStyle = '#ffffff';
-	ctx.fillText(`${member.displayName}!`, canvas.width / 2.5, canvas.height / 1.8);
+	  const canvas = Canvas.createCanvas(700, 250)
+	  const ctx = canvas.getContext('2d')
+  
+	  const background = await Canvas.loadImage(
+		path.join(__dirname, '../../wallpaper.jpg')
+	  )
+	  let x = 0
+	  let y = 0
+	  ctx.drawImage(background, x, y)
+  
+	  const pfp = await Canvas.loadImage(
+		member.user.displayAvatarURL({
+		  format: 'png',
+		})
+	  )
+	  x = canvas.width / 2 - pfp.width / 2
+	  y = 25
+	  ctx.drawImage(pfp, x, y)
+  
+	  ctx.fillStyle = '#ffffff'
+	  ctx.font = '35px sans-serif'
+	  let text = `Welcome ${member.user.id}`
+	  x = canvas.width / 2 - ctx.measureText(text).width / 2
+	  ctx.fillText(text, x, 60 + pfp.height)
+  
+	  ctx.font = '30px sans-serif'
+	  text = `Member #${member.guild.memberCount}`
+	  x = canvas.width / 2 - ctx.measureText(text).width / 2
+	  ctx.fillText(text, x, 100 + pfp.height)
+  
+	  const attachment = new MessageAttachment(canvas.toBuffer())
 
-	ctx.beginPath();
-	ctx.arc(125, 125, 100, 0, Math.PI * 2, true);
-	ctx.closePath();
-	ctx.clip();
-
-	const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
-	ctx.drawImage(avatar, 25, 25, 200, 200);
-
-	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
-	channel.send(attachment);
-
+	const WelcomeCID = settings.welcomeID
+	if(WelcomeCID < 0) return;
+	try{
+	const channel = await member.guild.channels.cache.get(`${WelcomeCID}`)
+		await channel.send(attachment);
+	} catch(err){
+		console.log(err)
+	}
 
 
 
  
 };
-

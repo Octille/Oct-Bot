@@ -1,22 +1,14 @@
+
 const profileModel = require("../../models/profileSchema");
 const cooldowns = new Map();
 const Guild = require('../../models/guild');
 const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
-  if(message.author.id == ""){
-    return message.channel.send('sorry but it looks like you were temporarily banned from using OCT')
-  }
-  const messages = ["Hello", "Hey", "Hi", "Goodday"]
+  if (message.author.bot) return;
+  const user = message.author;
 
-  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-  if(message.content.includes('hello')) {
-    message.reply(randomMessage);
-  }
 
-if(message.content.includes('bye')) {
-  message.reply('Sorry to see you go D:');
-} 
   const settings = await Guild.findOne({
     guildID: message.guild.id
 }, (err, guild) => {
@@ -27,6 +19,7 @@ if(message.content.includes('bye')) {
             guildID: message.guild.id,
             guildName: message.guild.name,
             prefix: process.env.PREFIX,
+            InviteLinks: 0,
 
         })
 
@@ -38,8 +31,16 @@ if(message.content.includes('bye')) {
     }
 });
 
+if (message.content.includes('discord.gg/'||'discordapp.com/invite/')){ 
+  if(settings.InviteLinks < 1){ //if it contains an invite link
+    message.delete()
+    message.channel.send(`${user} Invite links are not allowed on this server`)
+  }}
 
-    const prefix = settings.prefix;
+try{
+    let prefix = settings.prefix;
+   
+
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     let profileData;
   try {
@@ -98,6 +99,9 @@ if(message.content.includes('bye')) {
       );
       return;
   }
+
+
+  
     
     const args = message.content.slice(prefix.length).split(/ +/);
     const cmd = args.shift().toLowerCase();
@@ -131,6 +135,8 @@ if(message.content.includes('bye')) {
     if(command) command.execute(message, args, cmd, client, Discord, profileData);
 
     
- 
+  }catch (err) {
+    prefix = "!"
+  }
    
 }

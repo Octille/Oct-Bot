@@ -23,4 +23,4 @@ mongoose.connect(process.env.MONGODB_SRV, {
   .catch((error) => console.error(error));
 
 
-client.login(process.env.token);
+client.login(process.env.Testtoken);
