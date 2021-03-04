@@ -19,7 +19,7 @@ module.exports = {
                 fs.readdir(`./commands/${fff[i]}/`, (err1, files1) => {
                     files1.forEach((f2, i2) => {
                         const cmd = f2.replace('.js', '');
-                      hmu[iii].setFooter(`\`${cmd}\``, `_ _`);
+                      hmu[iii].addField(cmd, `_ _`);
                     });
                 });
             }  
