@@ -11,9 +11,15 @@ module.exports = {
         if (!args[0]) {
             return message.reply("Please provide a person to ban.")
          }
-        if (!args[1]) {
-            return message.reply("Please provide a reason to ban.")          
-        }
+         message.channel.send(`type a reason to ban ${message.mentions.users.first()} below`)
+         const filter = (m) => m.author.id === message.author.id
+         const collector = message.channel.createMessageCollector(filter, { max: 2, time: 15000 });
+         
+         collector.on('collect', async (m) => {
+             message.channel.send(`Banning member...`)
+        
+         
+
 
         
         if (!message.member.hasPermission("BAN_MEMBERS")) {
@@ -40,7 +46,7 @@ module.exports = {
             return message.reply("You can't ban yourself...")
                 }
         if (!toBan.bannable) {
-            return message.reply("I can't ban that person due to role hierarchy, I suppose.")
+            return message.reply("I can't ban that person due to there high role")
 
         }
         
@@ -51,7 +57,7 @@ module.exports = {
             .setTimestamp()
             .setDescription(`**- baned member:** ${toBan} (${toBan.id})
             **- baned by:** ${message.member} (${message.member.id})
-            **- Reason:** ${args.slice(1).join(" ")}`);
+            **- Reason:** ${m.content}`);
 
         const promptEmbed = new discord.MessageEmbed()
             .setColor("GREEN")
@@ -76,5 +82,6 @@ module.exports = {
                 message.reply(`ban canceled.`)
             }
         });
+    });
     }
 };

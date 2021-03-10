@@ -10,6 +10,13 @@ module.exports = {
             .setDescription(`${user} is 100% gay:rainbow_flag:`) 
             return message.channel.send(aviator)
         }
+        if (user.id == "554399813655986215"){
+            const aviator = new Discord.MessageEmbed()
+            .setColor("RANDOM")
+            .setTitle("gay o meter")
+            .setDescription(`${user} is 100% gay:rainbow_flag:`) 
+            return message.channel.send(aviator)
+        }
         if (user.id == "719249068563628102"){
             const aviator = new Discord.MessageEmbed()
             .setColor("RANDOM")

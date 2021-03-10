@@ -12,16 +12,20 @@ const profileSchema = new mongoose.Schema({
   },
   Items:
   {
-    placeholder: { type: Number },
+    Shirt: { type: Number, },
+    Pants: { type: Number },
     Cookies: { type: Number },
     FishingRod: { type: Number },
+    CommonFish: { type: Number },
+    RareFish: { type: Number },
+    MythicFish: { type: Number },
   
   },
   cooldowns: 
   {
-    Beg: {},
-    Mine: {},
-    Hourly: {},
+    Beg: { Date, },
+    Mine: { Date,},
+    Hourly: { Date },
   }
 
  

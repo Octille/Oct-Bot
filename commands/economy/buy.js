@@ -37,6 +37,34 @@ try{
                 return message.channel.send(`successfully bought **${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** cookie for **₪ ${cookiesscosts.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
       
             }
+            if(args[0] == "fishingrod"){
+              const amountedit = args[1]
+                    let amount = 1;
+                    if(amountedit){
+                      amount = args[1];
+                    }
+                    const FishingRodCost = 10000 * amount
+                    if(isNaN(amount)){
+                        return message.channel.send('please provide valid amount')
+                    }
+                    if(FishingRodCost > profileData.coins){
+                        return message.channel.send('You dont have enough to buy that');
+                    }
+                    
+          
+                    await profileModel.findOneAndUpdate(
+                        {
+                          userID: message.author.id,
+                        },
+                        {
+                          $inc:{
+                            coins: -FishingRodCost,
+                            "Items.FishingRod": amount,
+                          },
+                        }
+                      );
+                    return message.channel.send(`successfully bought **${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}** Fishing Rod for **₪ ${FishingRodCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}**`)
+                      }    
           } catch (err) {
             message.channel.send(`that item does not exist`)
           }

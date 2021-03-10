@@ -56,14 +56,17 @@ try{
            workers: 0 
           },
           Items: {
-          placeholder: 0,
-        }
+            Shirt: 1,
+            Pants: 1,
+        },
+        
     
           
           
         
       });
       profile.save();
+      message.channel.send(`oh no! ${user} looks like you wernt in my database but dont worry i have added you now you can use my commands.`)
     }
   } catch (err) {
     console.log(err);
@@ -128,11 +131,11 @@ try{
     time_stamps.set(message.author.id, current_time);
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
   } catch (err) {
-    return message.channel.send('there was no command found please refer to !help')}
+    return message.channel.send('command not found please refer to \`!help\`')}
  
 
 
-    if(command) command.execute(message, args, cmd, client, Discord, profileData);
+    if(command) command.execute(message, args, cmd, client, Discord, profileData, settings);
 
     
   }catch (err) {
