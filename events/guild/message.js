@@ -37,7 +37,7 @@ if (message.content.includes('discord.gg/'||'discordapp.com/invite/')){
     message.delete()
     message.channel.send(`${user} Invite links are not allowed on this server`)
   }}
-  if (message.content.includes("<@&816417292799442956>")) {
+  if (message.content.includes("<@&816417292799442956>" || "<@&818970912052346882>")) {
     let welcome = settings.WelcomeCID
     let invitelinks = 'off'
     if(settings.InviteLinks == '1'){
