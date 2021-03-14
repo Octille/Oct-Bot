@@ -5,6 +5,7 @@ const Guild = require('../../models/guild');
 const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
+
   if (message.author.bot) return;
   const user = message.author;
 
@@ -36,6 +37,20 @@ if (message.content.includes('discord.gg/'||'discordapp.com/invite/')){
     message.delete()
     message.channel.send(`${user} Invite links are not allowed on this server`)
   }}
+  if (message.content.includes("<@&816417292799442956>")) {
+    let welcome = settings.WelcomeCID
+    let invitelinks = 'off'
+    if(settings.InviteLinks == '1'){
+      invitelinks = 'on'
+    }
+    if(settings.WelcomeCID == null){
+      welcome = 'no welcome message setup'
+    }
+    const embed = new Discord.MessageEmbed()
+    .setTitle('oh, looks like i was mentioned here are my settings:')
+    .setDescription(`Prefix:\`${settings.prefix}\`\nWelcomeCID:\`${welcome}\`\nInvite Links:\`${invitelinks}\``)
+    return message.channel.send(embed);
+};
 
 try{
     let prefix = settings.prefix;
@@ -104,6 +119,7 @@ try{
   }
 
 
+
   
     
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -130,6 +146,7 @@ try{
   
     time_stamps.set(message.author.id, current_time);
     setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
+
   } catch (err) {
     return message.channel.send('command not found please refer to \`!help\`')}
  

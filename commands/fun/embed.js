@@ -13,20 +13,30 @@ module.exports = {
         
         collector.on('collect', m => {
             if(title == '0'){
+                const deltetitle = message.id
+              
                 title = m.content
                 return message.channel.send(`Your title has been set to \`${m.content}\`, now please provide a description`)
             }
             if(description == '0'){
+                const deletedescription = message.id
                 description = m.content
             }
-            message.channel.send('creating embed...').then((msg)=>{
+            const creatingembed = new Discord.MessageEmbed()
+            .setTitle(`creating embed...`);
+            message.channel.send(creatingembed).then((msg)=>{
+               
+                
                 const embed = new Discord.MessageEmbed()
                 .setTitle(title)
                 .setDescription(description)
                 .setFooter(`Embed created by ${message.author.username}`)
               setTimeout(() => {
-                
                 msg.edit(embed);
+      
+
+                
+              
               }, 1000);
             })
 
