@@ -5,9 +5,6 @@ const Guild = require('../../models/guild');
 const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
-  if (message.author.id = '726619959567974452'){
-    return message.channel.send(`sorry ${message.author} you are unfortunately banned from using oct please contact oct#8995 for info`);
-    }
 
   if (message.author.bot) return;
   const user = message.author;
