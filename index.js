@@ -7,6 +7,18 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 
+client.on("ready", () => {
+  client.user.setStatus('online')
+  client.user.setPresence({
+      game: {
+          name: '!help',
+          type: "Playing",
+          url: "https://bit.ly/38OiD4C"
+      }
+  });
+});
+
+
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 

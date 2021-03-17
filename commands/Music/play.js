@@ -7,7 +7,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'leave', 's', 'p', 'pause', 'unpause'],
+    aliases: ['skip', 'leave', 's', 'p', 'pause', 'unpause', 'q'],
     cooldown: 0,
     description: 'Advanced music bot',
     async execute(message,args, cmd, client, Discord){
@@ -56,7 +56,6 @@ module.exports = {
                     connection: null,
                     songs: []
                 }
-                
                 //Add our key and value pair into the global queue. We then use this to get our server queue.
                 queue.set(message.guild.id, queue_constructor);
                 queue_constructor.songs.push(song);
@@ -72,8 +71,15 @@ module.exports = {
                     throw err;
                 }
             } else{
+ 
                 server_queue.songs.push(song);
-                return message.channel.send(`👍 **${song.title}** added to queue!`);
+                const songs = new Discord.MessageEmbed()
+                .setTitle(`👍New song was added to queue`)
+                .setDescription(`[${song.title}](${song.url})`)
+
+              
+                return message.channel.send(songs);
+ 
             }
         }
         //shorten the play command
@@ -128,6 +134,9 @@ module.exports = {
                 server_queue.songs.push(song);
                 return message.channel.send(`👍 **${song.title}** added to queue!`);
             }
+        }
+        if (cmd === 'q'){
+            message.channel.send(server_queue)
         }
 
         else if(cmd === 'skip') skip_song(message, server_queue);

@@ -5,6 +5,9 @@ const Guild = require('../../models/guild');
 const mongoose = require('mongoose');
 
 module.exports = async(Discord, client, message) => {
+  if (message.author.id = '726619959567974452'){
+    return message.channel.send(`sorry ${message.author} you are unfortunately banned from using oct please contact oct#8995 for info`);
+    }
 
   if (message.author.bot) return;
   const user = message.author;
@@ -37,7 +40,7 @@ if (message.content.includes('discord.gg/'||'discordapp.com/invite/')){
     message.delete()
     message.channel.send(`${user} Invite links are not allowed on this server`)
   }}
-  if (message.content.includes("<@&816417292799442956>" || "<@&818970912052346882>")) {
+  if (message.content.includes("whatsmyprefix")) {
     let welcome = settings.WelcomeCID
     let invitelinks = 'off'
     if(settings.InviteLinks == '1'){
